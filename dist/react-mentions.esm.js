@@ -1273,6 +1273,8 @@ var MentionsInput = /*#__PURE__*/function (_React$Component) {
     });
 
     _defineProperty(_assertThisInitialized(_this), "renderSuggestionsOverlay", function () {
+      console.log(1111, _this.state.selectionStart);
+
       if (!isNumber(_this.state.selectionStart)) {
         // do not show suggestions when the input does not have the focus
         return null;
@@ -1594,7 +1596,8 @@ var MentionsInput = /*#__PURE__*/function (_React$Component) {
         top: caretOffsetParentRect.top + caretPosition.top + caretHeight
       };
       console.log(111);
-      var shadowRoot = (_document$querySelect = (_document$querySelect2 = document.querySelector("test")) === null || _document$querySelect2 === void 0 ? void 0 : _document$querySelect2.shadowRoot) !== null && _document$querySelect !== void 0 ? _document$querySelect : document;
+      var shadowRoot = (_document$querySelect = (_document$querySelect2 = document.querySelector("arqa-ai-client")) === null || _document$querySelect2 === void 0 ? void 0 : _document$querySelect2.shadowRoot) !== null && _document$querySelect !== void 0 ? _document$querySelect : document;
+      console.log(shadowRoot);
       var viewportHeight = Math.max(shadowRoot.documentElement.clientHeight, window.innerHeight || 0);
 
       if (!suggestions) {

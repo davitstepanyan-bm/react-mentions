@@ -831,7 +831,7 @@ var makeTriggerRegex = function(trigger) {
     }), _defineProperty(_assertThisInitialized(_this), "setSuggestionsElement", function(el) {
       _this.suggestionsElement = el;
     }), _defineProperty(_assertThisInitialized(_this), "renderSuggestionsOverlay", function() {
-      if (!isNumber(_this.state.selectionStart)) return null;
+      if (console.log(1111, _this.state.selectionStart), !isNumber(_this.state.selectionStart)) return null;
       var _this$state$suggestio = _this.state.suggestionsPosition, position = _this$state$suggestio.position, left = _this$state$suggestio.left, top = _this$state$suggestio.top, right = _this$state$suggestio.right, suggestionsNode = React__default.createElement(SuggestionsOverlay$1, {
         id: _this.uuidSuggestionsOverlay,
         style: _this.props.style("suggestions"),
@@ -973,7 +973,9 @@ var makeTriggerRegex = function(trigger) {
           top: caretOffsetParentRect.top + caretPosition.top + caretHeight
         };
         console.log(111);
-        var shadowRoot = null !== (_document$querySelect = null === (_document$querySelect2 = document.querySelector("test")) || void 0 === _document$querySelect2 ? void 0 : _document$querySelect2.shadowRoot) && void 0 !== _document$querySelect ? _document$querySelect : document, viewportHeight = Math.max(shadowRoot.documentElement.clientHeight, window.innerHeight || 0);
+        var shadowRoot = null !== (_document$querySelect = null === (_document$querySelect2 = document.querySelector("arqa-ai-client")) || void 0 === _document$querySelect2 ? void 0 : _document$querySelect2.shadowRoot) && void 0 !== _document$querySelect ? _document$querySelect : document;
+        console.log(shadowRoot);
+        var viewportHeight = Math.max(shadowRoot.documentElement.clientHeight, window.innerHeight || 0);
         if (suggestions) {
           var position = {};
           if (suggestionsPortalHost) {
