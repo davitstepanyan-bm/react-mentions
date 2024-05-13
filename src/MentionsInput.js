@@ -718,7 +718,8 @@ class MentionsInput extends React.Component {
       top: caretOffsetParentRect.top + caretPosition.top + caretHeight,
     }
     console.log(111)
-    const shadowRoot = document.querySelector("test")?.shadowRoot ?? document
+    const shadowRoot = document.querySelector("arqa-ai-client")?.shadowRoot ?? document;
+    console.log(shadowRoot)
     const viewportHeight = Math.max(
         shadowRoot.documentElement.clientHeight,
       window.innerHeight || 0
