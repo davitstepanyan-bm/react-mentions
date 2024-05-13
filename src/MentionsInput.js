@@ -459,6 +459,7 @@ class MentionsInput extends React.Component {
   }
 
   handleKeyDown = (ev) => {
+    console.log('focus', ev, ev.target)
     // do not intercept key events if the suggestions overlay is not shown
     const suggestionsCount = countSuggestions(this.state.suggestions)
 

@@ -1464,7 +1464,8 @@ var MentionsInput = /*#__PURE__*/function (_React$Component) {
     });
 
     _defineProperty(_assertThisInitialized(_this), "handleKeyDown", function (ev) {
-      // do not intercept key events if the suggestions overlay is not shown
+      console.log('focus', ev, ev.target); // do not intercept key events if the suggestions overlay is not shown
+
       var suggestionsCount = countSuggestions(_this.state.suggestions);
 
       if (suggestionsCount === 0 || !_this.suggestionsElement) {

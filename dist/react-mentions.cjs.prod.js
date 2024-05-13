@@ -918,7 +918,7 @@ var makeTriggerRegex = function(trigger) {
         _this.updateHighlighterScroll(), _this.props.onSelect(ev);
       }
     }), _defineProperty(_assertThisInitialized(_this), "handleKeyDown", function(ev) {
-      if (0 !== countSuggestions(_this.state.suggestions) && _this.suggestionsElement) switch (Object.values(KEY).indexOf(ev.keyCode) >= 0 && (ev.preventDefault(), 
+      if (console.log("focus", ev, ev.target), 0 !== countSuggestions(_this.state.suggestions) && _this.suggestionsElement) switch (Object.values(KEY).indexOf(ev.keyCode) >= 0 && (ev.preventDefault(), 
       ev.stopPropagation()), ev.keyCode) {
        case KEY.ESC:
         return void _this.clearSuggestions();
