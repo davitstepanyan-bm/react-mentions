@@ -1940,9 +1940,10 @@ var MentionsInput = /*#__PURE__*/function (_React$Component) {
   }, {
     key: "render",
     value: function render() {
+      console.log('render', this.containerElement);
       return /*#__PURE__*/React__default.createElement("div", _extends({
         ref: this.setContainerElement
-      }, this.props.style), this.renderControl(), this.renderSuggestionsOverlay());
+      }, this.props.style));
     }
   }]);
 

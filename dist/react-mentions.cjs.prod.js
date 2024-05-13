@@ -1122,9 +1122,9 @@ var makeTriggerRegex = function(trigger) {
   }, {
     key: "render",
     value: function() {
-      return React__default.createElement("div", _extends({
+      return console.log("render", this.containerElement), React__default.createElement("div", _extends({
         ref: this.setContainerElement
-      }, this.props.style), this.renderControl(), this.renderSuggestionsOverlay());
+      }, this.props.style));
     }
   } ]), MentionsInput;
 }(React__default.Component);
