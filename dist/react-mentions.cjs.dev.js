@@ -1943,7 +1943,7 @@ var MentionsInput = /*#__PURE__*/function (_React$Component) {
       console.log('render', this.containerElement);
       return /*#__PURE__*/React__default.createElement("div", _extends({
         ref: this.setContainerElement
-      }, this.props.style));
+      }, this.props.style), this.renderControl());
     }
   }]);
 

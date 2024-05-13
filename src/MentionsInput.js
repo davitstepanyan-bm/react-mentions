@@ -173,7 +173,7 @@ class MentionsInput extends React.Component {
     console.log('render', this.containerElement)
     return (
       <div ref={this.setContainerElement} {...this.props.style}>
-        {/*{this.renderControl()}*/}
+        {this.renderControl()}
         {/*{this.renderSuggestionsOverlay()}*/}
       </div>
     )
