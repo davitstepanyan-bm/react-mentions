@@ -255,6 +255,7 @@ class MentionsInput extends React.Component {
   }
 
   setSuggestionsElement = (el) => {
+    console.log(9999, el)
     this.suggestionsElement = el
   }
 
