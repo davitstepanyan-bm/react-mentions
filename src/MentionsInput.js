@@ -495,6 +495,7 @@ class MentionsInput extends React.Component {
 
   // Handle input element's change event
   handleChange = (ev) => {
+    console.log('changing')
     isComposing = false
 
 

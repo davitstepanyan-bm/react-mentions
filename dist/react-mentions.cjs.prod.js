@@ -877,7 +877,7 @@ var makeTriggerRegex = function(trigger) {
       var _this$props4, _this$props$valueLink;
       return _this.props.onChange ? (_this$props4 = _this.props).onChange.apply(_this$props4, [ event ].concat(args)) : _this.props.valueLink ? (_this$props$valueLink = _this.props.valueLink).requestChange.apply(_this$props$valueLink, [ event.target.value ].concat(args)) : void 0;
     }), _defineProperty(_assertThisInitialized(_this), "handleChange", function(ev) {
-      isComposing = !1;
+      console.log("changing"), isComposing = !1;
       var value = _this.props.value || "", config = readConfigFromChildren(_this.props.children), newPlainTextValue = ev.target.value, selectionStartBefore = _this.state.selectionStart;
       null == selectionStartBefore && (selectionStartBefore = ev.target.selectionStart);
       var selectionEndBefore = _this.state.selectionEnd;

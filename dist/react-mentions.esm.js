@@ -1366,6 +1366,7 @@ var MentionsInput = /*#__PURE__*/function (_React$Component) {
     });
 
     _defineProperty(_assertThisInitialized(_this), "handleChange", function (ev) {
+      console.log('changing');
       isComposing = false;
       var value = _this.props.value || '';
       var config = readConfigFromChildren(_this.props.children);
