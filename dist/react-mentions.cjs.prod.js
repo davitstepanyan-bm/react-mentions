@@ -1113,7 +1113,7 @@ var makeTriggerRegex = function(trigger) {
     value: function() {
       return React__default.createElement("div", _extends({
         ref: this.setContainerElement
-      }, this.props.style), this.renderControl());
+      }, this.props.style), this.renderControl(), this.renderSuggestionsOverlay());
     }
   } ]), MentionsInput;
 }(React__default.Component);

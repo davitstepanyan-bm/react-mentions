@@ -1924,7 +1924,7 @@ var MentionsInput = /*#__PURE__*/function (_React$Component) {
     value: function render() {
       return /*#__PURE__*/React__default.createElement("div", _extends({
         ref: this.setContainerElement
-      }, this.props.style), this.renderControl());
+      }, this.props.style), this.renderControl(), this.renderSuggestionsOverlay());
     }
   }]);
 
