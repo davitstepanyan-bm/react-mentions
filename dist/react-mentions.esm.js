@@ -1348,6 +1348,8 @@ var MentionsInput = /*#__PURE__*/function (_React$Component) {
     });
 
     _defineProperty(_assertThisInitialized(_this), "executeOnChange", function (event) {
+      console.log(1, 'ste');
+
       for (var _len = arguments.length, args = new Array(_len > 1 ? _len - 1 : 0), _key = 1; _key < _len; _key++) {
         args[_key - 1] = arguments[_key];
       }
@@ -1361,6 +1363,7 @@ var MentionsInput = /*#__PURE__*/function (_React$Component) {
       if (_this.props.valueLink) {
         var _this$props$valueLink;
 
+        console.log(2, 'ste');
         return (_this$props$valueLink = _this.props.valueLink).requestChange.apply(_this$props$valueLink, [event.target.value].concat(args));
       }
     });
@@ -1582,6 +1585,7 @@ var MentionsInput = /*#__PURE__*/function (_React$Component) {
           suggestionsPortalHost = _this$props5.suggestionsPortalHost,
           allowSuggestionsAboveCursor = _this$props5.allowSuggestionsAboveCursor,
           forceSuggestionsAboveCursor = _this$props5.forceSuggestionsAboveCursor;
+      console.log(122121, caretPosition, _this.suggestionsElement);
 
       if (!caretPosition || !_this.suggestionsElement) {
         return;

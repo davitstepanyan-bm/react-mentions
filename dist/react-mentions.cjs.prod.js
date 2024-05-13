@@ -873,9 +873,11 @@ var makeTriggerRegex = function(trigger) {
     }), _defineProperty(_assertThisInitialized(_this), "getPlainText", function() {
       return getPlainText(_this.props.value || "", readConfigFromChildren(_this.props.children));
     }), _defineProperty(_assertThisInitialized(_this), "executeOnChange", function(event) {
+      console.log(1, "ste");
       for (var _len = arguments.length, args = new Array(_len > 1 ? _len - 1 : 0), _key = 1; _key < _len; _key++) args[_key - 1] = arguments[_key];
       var _this$props4, _this$props$valueLink;
-      return _this.props.onChange ? (_this$props4 = _this.props).onChange.apply(_this$props4, [ event ].concat(args)) : _this.props.valueLink ? (_this$props$valueLink = _this.props.valueLink).requestChange.apply(_this$props$valueLink, [ event.target.value ].concat(args)) : void 0;
+      return _this.props.onChange ? (_this$props4 = _this.props).onChange.apply(_this$props4, [ event ].concat(args)) : _this.props.valueLink ? (console.log(2, "ste"), 
+      (_this$props$valueLink = _this.props.valueLink).requestChange.apply(_this$props$valueLink, [ event.target.value ].concat(args))) : void 0;
     }), _defineProperty(_assertThisInitialized(_this), "handleChange", function(ev) {
       console.log("changing"), isComposing = !1;
       var value = _this.props.value || "", config = readConfigFromChildren(_this.props.children), newPlainTextValue = ev.target.value, selectionStartBefore = _this.state.selectionStart;
@@ -967,7 +969,7 @@ var makeTriggerRegex = function(trigger) {
       });
     }), _defineProperty(_assertThisInitialized(_this), "updateSuggestionsPosition", function() {
       var _document$querySelect, _document$querySelect2, caretPosition = _this.state.caretPosition, _this$props5 = _this.props, suggestionsPortalHost = _this$props5.suggestionsPortalHost, allowSuggestionsAboveCursor = _this$props5.allowSuggestionsAboveCursor, forceSuggestionsAboveCursor = _this$props5.forceSuggestionsAboveCursor;
-      if (caretPosition && _this.suggestionsElement) {
+      if (console.log(122121, caretPosition, _this.suggestionsElement), caretPosition && _this.suggestionsElement) {
         var suggestions = _this.suggestionsElement, highlighter = _this.highlighterElement, caretOffsetParentRect = highlighter.getBoundingClientRect(), caretHeight = getComputedStyleLengthProp(highlighter, "font-size"), viewportRelative = {
           left: caretOffsetParentRect.left + caretPosition.left,
           top: caretOffsetParentRect.top + caretPosition.top + caretHeight
