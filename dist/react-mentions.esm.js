@@ -1366,6 +1366,7 @@ var MentionsInput = /*#__PURE__*/function (_React$Component) {
     });
 
     _defineProperty(_assertThisInitialized(_this), "handleChange", function (ev) {
+      console.log('change');
       isComposing = false;
       var value = _this.props.value || '';
       var config = readConfigFromChildren(_this.props.children);
@@ -1387,7 +1388,8 @@ var MentionsInput = /*#__PURE__*/function (_React$Component) {
         selectionStartBefore: selectionStartBefore,
         selectionEndBefore: selectionEndBefore,
         selectionEndAfter: ev.target.selectionEnd
-      }, config); // In case a mention is deleted, also adjust the new plain text value
+      }, config);
+      console.log('change', newValue, newPlainTextValue); // In case a mention is deleted, also adjust the new plain text value
 
       newPlainTextValue = getPlainText(newValue, config); // Save current selection after change to be able to restore caret position after rerendering
 
@@ -1397,6 +1399,7 @@ var MentionsInput = /*#__PURE__*/function (_React$Component) {
       // selection range that are automatically deleted
 
       var startOfMention = findStartOfMentionInPlainText(value, config, selectionStart);
+      console.log('change', startOfMention, selectionStart, selectionEnd);
 
       if (startOfMention !== undefined && _this.state.selectionEnd > startOfMention) {
         // only if a deletion has taken place
@@ -1405,6 +1408,8 @@ var MentionsInput = /*#__PURE__*/function (_React$Component) {
         setSelectionAfterMentionChange = true;
       }
 
+      console.log('change', selectionStart, selectionEnd, setSelectionAfterMentionChange);
+
       _this.setState({
         selectionStart: selectionStart,
         selectionEnd: selectionEnd,
@@ -1412,6 +1417,7 @@ var MentionsInput = /*#__PURE__*/function (_React$Component) {
       });
 
       var mentions = getMentions(newValue, config);
+      console.log('change', mentions);
 
       if (ev.nativeEvent.isComposing && selectionStart === selectionEnd) {
         _this.updateMentionsQueries(_this.inputElement.value, selectionStart);

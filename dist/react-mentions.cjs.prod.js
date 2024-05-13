@@ -877,7 +877,7 @@ var makeTriggerRegex = function(trigger) {
       var _this$props4, _this$props$valueLink;
       return _this.props.onChange ? (_this$props4 = _this.props).onChange.apply(_this$props4, [ event ].concat(args)) : _this.props.valueLink ? (_this$props$valueLink = _this.props.valueLink).requestChange.apply(_this$props$valueLink, [ event.target.value ].concat(args)) : void 0;
     }), _defineProperty(_assertThisInitialized(_this), "handleChange", function(ev) {
-      isComposing = !1;
+      console.log("change"), isComposing = !1;
       var value = _this.props.value || "", config = readConfigFromChildren(_this.props.children), newPlainTextValue = ev.target.value, selectionStartBefore = _this.state.selectionStart;
       null == selectionStartBefore && (selectionStartBefore = ev.target.selectionStart);
       var selectionEndBefore = _this.state.selectionEnd;
@@ -887,16 +887,17 @@ var makeTriggerRegex = function(trigger) {
         selectionEndBefore: selectionEndBefore,
         selectionEndAfter: ev.target.selectionEnd
       }, config);
-      newPlainTextValue = getPlainText(newValue, config);
+      console.log("change", newValue, newPlainTextValue), newPlainTextValue = getPlainText(newValue, config);
       var selectionStart = ev.target.selectionStart, selectionEnd = ev.target.selectionEnd, setSelectionAfterMentionChange = !1, startOfMention = findStartOfMentionInPlainText(value, config, selectionStart);
-      void 0 !== startOfMention && _this.state.selectionEnd > startOfMention && (selectionEnd = selectionStart = startOfMention + (ev.nativeEvent.data ? ev.nativeEvent.data.length : 0), 
-      setSelectionAfterMentionChange = !0), _this.setState({
+      console.log("change", startOfMention, selectionStart, selectionEnd), void 0 !== startOfMention && _this.state.selectionEnd > startOfMention && (selectionEnd = selectionStart = startOfMention + (ev.nativeEvent.data ? ev.nativeEvent.data.length : 0), 
+      setSelectionAfterMentionChange = !0), console.log("change", selectionStart, selectionEnd, setSelectionAfterMentionChange), 
+      _this.setState({
         selectionStart: selectionStart,
         selectionEnd: selectionEnd,
         setSelectionAfterMentionChange: setSelectionAfterMentionChange
       });
       var mentions = getMentions(newValue, config);
-      ev.nativeEvent.isComposing && selectionStart === selectionEnd && _this.updateMentionsQueries(_this.inputElement.value, selectionStart);
+      console.log("change", mentions), ev.nativeEvent.isComposing && selectionStart === selectionEnd && _this.updateMentionsQueries(_this.inputElement.value, selectionStart);
       var eventMock = {
         target: {
           value: newValue

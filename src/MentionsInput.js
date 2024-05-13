@@ -346,6 +346,7 @@ class MentionsInput extends React.Component {
 
   // Handle input element's change event
   handleChange = (ev) => {
+    console.log('change')
     isComposing = false
 
 
@@ -376,6 +377,8 @@ class MentionsInput extends React.Component {
       config
     )
 
+    console.log('change', newValue, newPlainTextValue)
+
     // In case a mention is deleted, also adjust the new plain text value
     newPlainTextValue = getPlainText(newValue, config)
 
@@ -391,6 +394,7 @@ class MentionsInput extends React.Component {
       config,
       selectionStart
     )
+    console.log('change', startOfMention, selectionStart, selectionEnd)
 
     if (
       startOfMention !== undefined &&
@@ -403,6 +407,8 @@ class MentionsInput extends React.Component {
       setSelectionAfterMentionChange = true
     }
 
+    console.log('change', selectionStart, selectionEnd, setSelectionAfterMentionChange)
+
     this.setState({
       selectionStart,
       selectionEnd,
@@ -410,6 +416,8 @@ class MentionsInput extends React.Component {
     })
 
     let mentions = getMentions(newValue, config)
+
+    console.log('change', mentions)
 
     if (ev.nativeEvent.isComposing && selectionStart === selectionEnd) {
       this.updateMentionsQueries(this.inputElement.value, selectionStart)
