@@ -1606,7 +1606,7 @@ var MentionsInput = /*#__PURE__*/function (_React$Component) {
       };
       console.log(111);
       var shadowRoot = (_document$querySelect = (_document$querySelect2 = document.querySelector("arqa-ai-client")) === null || _document$querySelect2 === void 0 ? void 0 : _document$querySelect2.shadowRoot) !== null && _document$querySelect !== void 0 ? _document$querySelect : document;
-      console.log(shadowRoot);
+      console.log(222, shadowRoot);
       var viewportHeight = Math.max(shadowRoot.documentElement.clientHeight, window.innerHeight || 0);
 
       if (!suggestions) {
