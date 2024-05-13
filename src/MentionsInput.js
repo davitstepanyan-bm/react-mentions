@@ -288,7 +288,7 @@ class MentionsInput extends React.Component {
       </SuggestionsOverlay>
     )
 
-    console.log(121212, this.props.suggestionsPortalHost)
+    console.log(121212, this.state.suggestionsPosition, suggestionsNode)
     if (this.props.suggestionsPortalHost) {
       return ReactDOM.createPortal(
         suggestionsNode,

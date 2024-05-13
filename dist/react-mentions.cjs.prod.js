@@ -852,7 +852,7 @@ var makeTriggerRegex = function(trigger) {
         ignoreAccents: _this.props.ignoreAccents,
         a11ySuggestionsListLabel: _this.props.a11ySuggestionsListLabel
       }, _this.props.children);
-      return console.log(121212, _this.props.suggestionsPortalHost), _this.props.suggestionsPortalHost ? ReactDOM.createPortal(suggestionsNode, _this.props.suggestionsPortalHost) : suggestionsNode;
+      return console.log(121212, _this.state.suggestionsPosition, suggestionsNode), _this.props.suggestionsPortalHost ? ReactDOM.createPortal(suggestionsNode, _this.props.suggestionsPortalHost) : suggestionsNode;
     }), _defineProperty(_assertThisInitialized(_this), "renderHighlighter", function() {
       var _this$state = _this.state, selectionStart = _this$state.selectionStart, selectionEnd = _this$state.selectionEnd, _this$props3 = _this.props, singleLine = _this$props3.singleLine, children = _this$props3.children, value = _this$props3.value, style = _this$props3.style;
       return React__default.createElement(Highlighter$1, {

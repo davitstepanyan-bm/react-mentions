@@ -1312,7 +1312,7 @@ var MentionsInput = /*#__PURE__*/function (_React$Component) {
         ignoreAccents: _this.props.ignoreAccents,
         a11ySuggestionsListLabel: _this.props.a11ySuggestionsListLabel
       }, _this.props.children);
-      console.log(121212, _this.props.suggestionsPortalHost);
+      console.log(121212, _this.state.suggestionsPosition, suggestionsNode);
 
       if (_this.props.suggestionsPortalHost) {
         return /*#__PURE__*/ReactDOM.createPortal(suggestionsNode, _this.props.suggestionsPortalHost);
