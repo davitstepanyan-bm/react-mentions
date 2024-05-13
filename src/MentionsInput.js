@@ -337,11 +337,13 @@ class MentionsInput extends React.Component {
   }
 
   executeOnChange = (event, ...args) => {
+    console.log(1, 'ste')
     if (this.props.onChange) {
       return this.props.onChange(event, ...args)
     }
 
     if (this.props.valueLink) {
+      console.log(2, 'ste')
       return this.props.valueLink.requestChange(event.target.value, ...args)
     }
   }
@@ -705,6 +707,8 @@ class MentionsInput extends React.Component {
       allowSuggestionsAboveCursor,
       forceSuggestionsAboveCursor,
     } = this.props
+
+    console.log(122121, caretPosition, this.suggestionsElement)
 
     if (!caretPosition || !this.suggestionsElement) {
       return
