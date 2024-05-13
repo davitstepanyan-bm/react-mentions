@@ -814,7 +814,7 @@ var makeTriggerRegex = function(trigger) {
       });
     }), _defineProperty(_assertThisInitialized(_this), "renderControl", function() {
       var _this$props2 = _this.props, singleLine = _this$props2.singleLine, style = _this$props2.style, inputProps = _this.getInputProps();
-      return React__default.createElement("div", style("control"), singleLine ? _this.renderInput(inputProps) : _this.renderTextarea(inputProps));
+      return React__default.createElement("div", style("control"), _this.renderHighlighter(), singleLine ? _this.renderInput(inputProps) : _this.renderTextarea(inputProps));
     }), _defineProperty(_assertThisInitialized(_this), "renderInput", function(props) {
       return React__default.createElement("input", _extends({
         type: "text",
@@ -972,8 +972,7 @@ var makeTriggerRegex = function(trigger) {
         var suggestions = _this.suggestionsElement, highlighter = _this.highlighterElement, caretOffsetParentRect = highlighter.getBoundingClientRect(), caretHeight = getComputedStyleLengthProp(highlighter, "font-size"), viewportRelative = {
           left: caretOffsetParentRect.left + caretPosition.left,
           top: caretOffsetParentRect.top + caretPosition.top + caretHeight
-        }, viewportHeight = (null !== (_document$querySelect = null === (_document$querySelect2 = document.querySelector("arqa-ai-client")) || void 0 === _document$querySelect2 ? void 0 : _document$querySelect2.shadowRoot) && void 0 !== _document$querySelect || document, 
-        Math.max(document.documentElement.clientHeight, window.innerHeight || 0));
+        }, shadowRoot = null !== (_document$querySelect = null === (_document$querySelect2 = document.querySelector("arqa-ai-client")) || void 0 === _document$querySelect2 ? void 0 : _document$querySelect2.shadowRoot) && void 0 !== _document$querySelect ? _document$querySelect : document, viewportHeight = Math.max(shadowRoot.documentElement.clientHeight, window.innerHeight || 0);
         if (suggestions) {
           var position = {};
           if (suggestionsPortalHost) {

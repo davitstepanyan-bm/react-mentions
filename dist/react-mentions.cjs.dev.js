@@ -1249,7 +1249,7 @@ var MentionsInput = /*#__PURE__*/function (_React$Component) {
 
       var inputProps = _this.getInputProps();
 
-      return /*#__PURE__*/React__default.createElement("div", style('control'), singleLine ? _this.renderInput(inputProps) : _this.renderTextarea(inputProps));
+      return /*#__PURE__*/React__default.createElement("div", style('control'), _this.renderHighlighter(), singleLine ? _this.renderInput(inputProps) : _this.renderTextarea(inputProps));
     });
 
     _defineProperty(_assertThisInitialized(_this), "renderInput", function (props) {
@@ -1612,7 +1612,7 @@ var MentionsInput = /*#__PURE__*/function (_React$Component) {
         top: caretOffsetParentRect.top + caretPosition.top + caretHeight
       };
       var shadowRoot = (_document$querySelect = (_document$querySelect2 = document.querySelector("arqa-ai-client")) === null || _document$querySelect2 === void 0 ? void 0 : _document$querySelect2.shadowRoot) !== null && _document$querySelect !== void 0 ? _document$querySelect : document;
-      var viewportHeight = Math.max(document.documentElement.clientHeight, window.innerHeight || 0);
+      var viewportHeight = Math.max(shadowRoot.documentElement.clientHeight, window.innerHeight || 0);
 
       if (!suggestions) {
         return;
