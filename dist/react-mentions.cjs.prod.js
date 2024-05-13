@@ -889,10 +889,12 @@ var makeTriggerRegex = function(trigger) {
         selectionEndBefore: selectionEndBefore,
         selectionEndAfter: ev.target.selectionEnd
       }, config);
-      newPlainTextValue = getPlainText(newValue, config);
+      newPlainTextValue = getPlainText(newValue, config), console.log("ev.target.selectionStart", ev.target.selectionStart);
       var selectionStart = ev.target.selectionStart, selectionEnd = ev.target.selectionEnd, setSelectionAfterMentionChange = !1, startOfMention = findStartOfMentionInPlainText(value, config, selectionStart);
-      void 0 !== startOfMention && _this.state.selectionEnd > startOfMention && (selectionEnd = selectionStart = startOfMention + (ev.nativeEvent.data ? ev.nativeEvent.data.length : 0), 
-      setSelectionAfterMentionChange = !0), _this.setState({
+      void 0 !== startOfMention && _this.state.selectionEnd > startOfMention && (console.log("(ev.nativeEvent.data ? ev.nativeEvent.data.length : 0)", ev.nativeEvent.data ? ev.nativeEvent.data.length : 0), 
+      selectionEnd = selectionStart = startOfMention + (ev.nativeEvent.data ? ev.nativeEvent.data.length : 0), 
+      setSelectionAfterMentionChange = !0), console.log("selectionStart", selectionStart), 
+      _this.setState({
         selectionStart: selectionStart,
         selectionEnd: selectionEnd,
         setSelectionAfterMentionChange: setSelectionAfterMentionChange

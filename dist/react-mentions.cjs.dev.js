@@ -1402,7 +1402,8 @@ var MentionsInput = /*#__PURE__*/function (_React$Component) {
         selectionEndAfter: ev.target.selectionEnd
       }, config); // In case a mention is deleted, also adjust the new plain text value
 
-      newPlainTextValue = getPlainText(newValue, config); // Save current selection after change to be able to restore caret position after rerendering
+      newPlainTextValue = getPlainText(newValue, config);
+      console.log('ev.target.selectionStart', ev.target.selectionStart); // Save current selection after change to be able to restore caret position after rerendering
 
       var selectionStart = ev.target.selectionStart;
       var selectionEnd = ev.target.selectionEnd;
@@ -1413,10 +1414,13 @@ var MentionsInput = /*#__PURE__*/function (_React$Component) {
 
       if (startOfMention !== undefined && _this.state.selectionEnd > startOfMention) {
         // only if a deletion has taken place
+        console.log("(ev.nativeEvent.data ? ev.nativeEvent.data.length : 0)", ev.nativeEvent.data ? ev.nativeEvent.data.length : 0);
         selectionStart = startOfMention + (ev.nativeEvent.data ? ev.nativeEvent.data.length : 0);
         selectionEnd = selectionStart;
         setSelectionAfterMentionChange = true;
       }
+
+      console.log('selectionStart', selectionStart);
 
       _this.setState({
         selectionStart: selectionStart,
