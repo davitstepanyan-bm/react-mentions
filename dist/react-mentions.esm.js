@@ -1274,8 +1274,6 @@ var MentionsInput = /*#__PURE__*/function (_React$Component) {
     });
 
     _defineProperty(_assertThisInitialized(_this), "renderSuggestionsOverlay", function () {
-      console.log(1111, _this.state.selectionStart);
-
       if (!isNumber(_this.state.selectionStart)) {
         // do not show suggestions when the input does not have the focus
         return null;
@@ -1306,6 +1304,7 @@ var MentionsInput = /*#__PURE__*/function (_React$Component) {
         ignoreAccents: _this.props.ignoreAccents,
         a11ySuggestionsListLabel: _this.props.a11ySuggestionsListLabel
       }, _this.props.children);
+      console.log(121212, _this.props.suggestionsPortalHost);
 
       if (_this.props.suggestionsPortalHost) {
         return /*#__PURE__*/ReactDOM.createPortal(suggestionsNode, _this.props.suggestionsPortalHost);
@@ -1349,8 +1348,6 @@ var MentionsInput = /*#__PURE__*/function (_React$Component) {
     });
 
     _defineProperty(_assertThisInitialized(_this), "executeOnChange", function (event) {
-      console.log(1, 'ste');
-
       for (var _len = arguments.length, args = new Array(_len > 1 ? _len - 1 : 0), _key = 1; _key < _len; _key++) {
         args[_key - 1] = arguments[_key];
       }
@@ -1364,13 +1361,11 @@ var MentionsInput = /*#__PURE__*/function (_React$Component) {
       if (_this.props.valueLink) {
         var _this$props$valueLink;
 
-        console.log(2, 'ste');
         return (_this$props$valueLink = _this.props.valueLink).requestChange.apply(_this$props$valueLink, [event.target.value].concat(args));
       }
     });
 
     _defineProperty(_assertThisInitialized(_this), "handleChange", function (ev) {
-      console.log('changing');
       isComposing = false;
       var value = _this.props.value || '';
       var config = readConfigFromChildren(_this.props.children);
@@ -1394,8 +1389,7 @@ var MentionsInput = /*#__PURE__*/function (_React$Component) {
         selectionEndAfter: ev.target.selectionEnd
       }, config); // In case a mention is deleted, also adjust the new plain text value
 
-      newPlainTextValue = getPlainText(newValue, config);
-      console.log('ev.target.selectionStart', ev.target.selectionStart); // Save current selection after change to be able to restore caret position after rerendering
+      newPlainTextValue = getPlainText(newValue, config); // Save current selection after change to be able to restore caret position after rerendering
 
       var selectionStart = ev.target.selectionStart;
       var selectionEnd = ev.target.selectionEnd;
@@ -1406,13 +1400,10 @@ var MentionsInput = /*#__PURE__*/function (_React$Component) {
 
       if (startOfMention !== undefined && _this.state.selectionEnd > startOfMention) {
         // only if a deletion has taken place
-        console.log("(ev.nativeEvent.data ? ev.nativeEvent.data.length : 0)", ev.nativeEvent.data ? ev.nativeEvent.data.length : 0);
         selectionStart = startOfMention + (ev.nativeEvent.data ? ev.nativeEvent.data.length : 0);
         selectionEnd = selectionStart;
         setSelectionAfterMentionChange = true;
       }
-
-      console.log('selectionStart', selectionStart);
 
       _this.setState({
         selectionStart: selectionStart,
@@ -1423,8 +1414,6 @@ var MentionsInput = /*#__PURE__*/function (_React$Component) {
       var mentions = getMentions(newValue, config);
 
       if (ev.nativeEvent.isComposing && selectionStart === selectionEnd) {
-        console.log('updateMentionsQueries');
-
         _this.updateMentionsQueries(_this.inputElement.value, selectionStart);
       } // Propagate change
       // let handleChange = this.getOnChange(this.props) || emptyFunction;
@@ -1464,8 +1453,7 @@ var MentionsInput = /*#__PURE__*/function (_React$Component) {
     });
 
     _defineProperty(_assertThisInitialized(_this), "handleKeyDown", function (ev) {
-      console.log('focus', ev, ev.target); // do not intercept key events if the suggestions overlay is not shown
-
+      // do not intercept key events if the suggestions overlay is not shown
       var suggestionsCount = countSuggestions(_this.state.suggestions);
 
       if (suggestionsCount === 0 || !_this.suggestionsElement) {
@@ -1608,9 +1596,7 @@ var MentionsInput = /*#__PURE__*/function (_React$Component) {
         left: caretOffsetParentRect.left + caretPosition.left,
         top: caretOffsetParentRect.top + caretPosition.top + caretHeight
       };
-      console.log(111);
       var shadowRoot = (_document$querySelect = (_document$querySelect2 = document.querySelector("arqa-ai-client")) === null || _document$querySelect2 === void 0 ? void 0 : _document$querySelect2.shadowRoot) !== null && _document$querySelect !== void 0 ? _document$querySelect : document;
-      console.log(222, shadowRoot);
       var viewportHeight = Math.max(shadowRoot.documentElement.clientHeight, window.innerHeight || 0);
 
       if (!suggestions) {
@@ -1894,7 +1880,6 @@ var MentionsInput = /*#__PURE__*/function (_React$Component) {
   _createClass(MentionsInput, [{
     key: "componentDidMount",
     value: function componentDidMount() {
-      console.log('mpount');
       this.updateSuggestionsPosition();
     }
   }, {
@@ -1904,14 +1889,12 @@ var MentionsInput = /*#__PURE__*/function (_React$Component) {
       // triggered by an update to suggestionsPosition.
 
       if (prevState.suggestionsPosition === this.state.suggestionsPosition) {
-        console.log('updateSuggestionsPosition');
         this.updateSuggestionsPosition();
       } // maintain selection in case a mention is added/removed causing
       // the cursor to jump to the end
 
 
       if (this.state.setSelectionAfterMentionChange) {
-        console.log('setSelectionAfterMentionChange');
         this.setState({
           setSelectionAfterMentionChange: false
         });
@@ -1919,7 +1902,6 @@ var MentionsInput = /*#__PURE__*/function (_React$Component) {
       }
 
       if (this.state.setSelectionAfterHandlePaste) {
-        console.log('setSelectionAfterHandlePaste');
         this.setState({
           setSelectionAfterHandlePaste: false
         });
@@ -1932,7 +1914,6 @@ var MentionsInput = /*#__PURE__*/function (_React$Component) {
   }, {
     key: "render",
     value: function render() {
-      console.log('render', this.containerElement);
       return /*#__PURE__*/React.createElement("div", _extends({
         ref: this.setContainerElement
       }, this.props.style), this.renderControl());

@@ -831,7 +831,7 @@ var makeTriggerRegex = function(trigger) {
     }), _defineProperty(_assertThisInitialized(_this), "setSuggestionsElement", function(el) {
       console.log(9999, el), _this.suggestionsElement = el;
     }), _defineProperty(_assertThisInitialized(_this), "renderSuggestionsOverlay", function() {
-      if (console.log(1111, _this.state.selectionStart), !isNumber(_this.state.selectionStart)) return null;
+      if (!isNumber(_this.state.selectionStart)) return null;
       var _this$state$suggestio = _this.state.suggestionsPosition, position = _this$state$suggestio.position, left = _this$state$suggestio.left, top = _this$state$suggestio.top, right = _this$state$suggestio.right, suggestionsNode = React__default.createElement(SuggestionsOverlay$1, {
         id: _this.uuidSuggestionsOverlay,
         style: _this.props.style("suggestions"),
@@ -852,7 +852,7 @@ var makeTriggerRegex = function(trigger) {
         ignoreAccents: _this.props.ignoreAccents,
         a11ySuggestionsListLabel: _this.props.a11ySuggestionsListLabel
       }, _this.props.children);
-      return _this.props.suggestionsPortalHost ? ReactDOM.createPortal(suggestionsNode, _this.props.suggestionsPortalHost) : suggestionsNode;
+      return console.log(121212, _this.props.suggestionsPortalHost), _this.props.suggestionsPortalHost ? ReactDOM.createPortal(suggestionsNode, _this.props.suggestionsPortalHost) : suggestionsNode;
     }), _defineProperty(_assertThisInitialized(_this), "renderHighlighter", function() {
       var _this$state = _this.state, selectionStart = _this$state.selectionStart, selectionEnd = _this$state.selectionEnd, _this$props3 = _this.props, singleLine = _this$props3.singleLine, children = _this$props3.children, value = _this$props3.value, style = _this$props3.style;
       return React__default.createElement(Highlighter$1, {
@@ -873,13 +873,11 @@ var makeTriggerRegex = function(trigger) {
     }), _defineProperty(_assertThisInitialized(_this), "getPlainText", function() {
       return getPlainText(_this.props.value || "", readConfigFromChildren(_this.props.children));
     }), _defineProperty(_assertThisInitialized(_this), "executeOnChange", function(event) {
-      console.log(1, "ste");
       for (var _len = arguments.length, args = new Array(_len > 1 ? _len - 1 : 0), _key = 1; _key < _len; _key++) args[_key - 1] = arguments[_key];
       var _this$props4, _this$props$valueLink;
-      return _this.props.onChange ? (_this$props4 = _this.props).onChange.apply(_this$props4, [ event ].concat(args)) : _this.props.valueLink ? (console.log(2, "ste"), 
-      (_this$props$valueLink = _this.props.valueLink).requestChange.apply(_this$props$valueLink, [ event.target.value ].concat(args))) : void 0;
+      return _this.props.onChange ? (_this$props4 = _this.props).onChange.apply(_this$props4, [ event ].concat(args)) : _this.props.valueLink ? (_this$props$valueLink = _this.props.valueLink).requestChange.apply(_this$props$valueLink, [ event.target.value ].concat(args)) : void 0;
     }), _defineProperty(_assertThisInitialized(_this), "handleChange", function(ev) {
-      console.log("changing"), isComposing = !1;
+      isComposing = !1;
       var value = _this.props.value || "", config = readConfigFromChildren(_this.props.children), newPlainTextValue = ev.target.value, selectionStartBefore = _this.state.selectionStart;
       null == selectionStartBefore && (selectionStartBefore = ev.target.selectionStart);
       var selectionEndBefore = _this.state.selectionEnd;
@@ -889,19 +887,16 @@ var makeTriggerRegex = function(trigger) {
         selectionEndBefore: selectionEndBefore,
         selectionEndAfter: ev.target.selectionEnd
       }, config);
-      newPlainTextValue = getPlainText(newValue, config), console.log("ev.target.selectionStart", ev.target.selectionStart);
+      newPlainTextValue = getPlainText(newValue, config);
       var selectionStart = ev.target.selectionStart, selectionEnd = ev.target.selectionEnd, setSelectionAfterMentionChange = !1, startOfMention = findStartOfMentionInPlainText(value, config, selectionStart);
-      void 0 !== startOfMention && _this.state.selectionEnd > startOfMention && (console.log("(ev.nativeEvent.data ? ev.nativeEvent.data.length : 0)", ev.nativeEvent.data ? ev.nativeEvent.data.length : 0), 
-      selectionEnd = selectionStart = startOfMention + (ev.nativeEvent.data ? ev.nativeEvent.data.length : 0), 
-      setSelectionAfterMentionChange = !0), console.log("selectionStart", selectionStart), 
-      _this.setState({
+      void 0 !== startOfMention && _this.state.selectionEnd > startOfMention && (selectionEnd = selectionStart = startOfMention + (ev.nativeEvent.data ? ev.nativeEvent.data.length : 0), 
+      setSelectionAfterMentionChange = !0), _this.setState({
         selectionStart: selectionStart,
         selectionEnd: selectionEnd,
         setSelectionAfterMentionChange: setSelectionAfterMentionChange
       });
       var mentions = getMentions(newValue, config);
-      ev.nativeEvent.isComposing && selectionStart === selectionEnd && (console.log("updateMentionsQueries"), 
-      _this.updateMentionsQueries(_this.inputElement.value, selectionStart));
+      ev.nativeEvent.isComposing && selectionStart === selectionEnd && _this.updateMentionsQueries(_this.inputElement.value, selectionStart);
       var eventMock = {
         target: {
           value: newValue
@@ -918,7 +913,7 @@ var makeTriggerRegex = function(trigger) {
         _this.updateHighlighterScroll(), _this.props.onSelect(ev);
       }
     }), _defineProperty(_assertThisInitialized(_this), "handleKeyDown", function(ev) {
-      if (console.log("focus", ev, ev.target), 0 !== countSuggestions(_this.state.suggestions) && _this.suggestionsElement) switch (Object.values(KEY).indexOf(ev.keyCode) >= 0 && (ev.preventDefault(), 
+      if (0 !== countSuggestions(_this.state.suggestions) && _this.suggestionsElement) switch (Object.values(KEY).indexOf(ev.keyCode) >= 0 && (ev.preventDefault(), 
       ev.stopPropagation()), ev.keyCode) {
        case KEY.ESC:
         return void _this.clearSuggestions();
@@ -976,11 +971,7 @@ var makeTriggerRegex = function(trigger) {
         var suggestions = _this.suggestionsElement, highlighter = _this.highlighterElement, caretOffsetParentRect = highlighter.getBoundingClientRect(), caretHeight = getComputedStyleLengthProp(highlighter, "font-size"), viewportRelative = {
           left: caretOffsetParentRect.left + caretPosition.left,
           top: caretOffsetParentRect.top + caretPosition.top + caretHeight
-        };
-        console.log(111);
-        var shadowRoot = null !== (_document$querySelect = null === (_document$querySelect2 = document.querySelector("arqa-ai-client")) || void 0 === _document$querySelect2 ? void 0 : _document$querySelect2.shadowRoot) && void 0 !== _document$querySelect ? _document$querySelect : document;
-        console.log(222, shadowRoot);
-        var viewportHeight = Math.max(shadowRoot.documentElement.clientHeight, window.innerHeight || 0);
+        }, shadowRoot = null !== (_document$querySelect = null === (_document$querySelect2 = document.querySelector("arqa-ai-client")) || void 0 === _document$querySelect2 ? void 0 : _document$querySelect2.shadowRoot) && void 0 !== _document$querySelect ? _document$querySelect : document, viewportHeight = Math.max(shadowRoot.documentElement.clientHeight, window.innerHeight || 0);
         if (suggestions) {
           var position = {};
           if (suggestionsPortalHost) {
@@ -1102,17 +1093,15 @@ var makeTriggerRegex = function(trigger) {
   return _createClass(MentionsInput, [ {
     key: "componentDidMount",
     value: function() {
-      console.log("mpount"), this.updateSuggestionsPosition();
+      this.updateSuggestionsPosition();
     }
   }, {
     key: "componentDidUpdate",
     value: function(prevProps, prevState) {
-      console.log("update"), prevState.suggestionsPosition === this.state.suggestionsPosition && (console.log("updateSuggestionsPosition"), 
-      this.updateSuggestionsPosition()), this.state.setSelectionAfterMentionChange && (console.log("setSelectionAfterMentionChange"), 
-      this.setState({
+      console.log("update"), prevState.suggestionsPosition === this.state.suggestionsPosition && this.updateSuggestionsPosition(), 
+      this.state.setSelectionAfterMentionChange && (this.setState({
         setSelectionAfterMentionChange: !1
-      }), this.setSelection(this.state.selectionStart, this.state.selectionEnd)), this.state.setSelectionAfterHandlePaste && (console.log("setSelectionAfterHandlePaste"), 
-      this.setState({
+      }), this.setSelection(this.state.selectionStart, this.state.selectionEnd)), this.state.setSelectionAfterHandlePaste && (this.setState({
         setSelectionAfterHandlePaste: !1
       }), this.setSelection(this.state.selectionStart, this.state.selectionEnd));
     }
@@ -1122,7 +1111,7 @@ var makeTriggerRegex = function(trigger) {
   }, {
     key: "render",
     value: function() {
-      return console.log("render", this.containerElement), React__default.createElement("div", _extends({
+      return React__default.createElement("div", _extends({
         ref: this.setContainerElement
       }, this.props.style), this.renderControl());
     }

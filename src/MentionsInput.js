@@ -138,8 +138,6 @@ class MentionsInput extends React.Component {
   }
 
   componentDidMount() {
-
-    console.log('mpount')
     this.updateSuggestionsPosition()
   }
 
@@ -148,19 +146,16 @@ class MentionsInput extends React.Component {
     // Update position of suggestions unless this componentDidUpdate was
     // triggered by an update to suggestionsPosition.
     if (prevState.suggestionsPosition === this.state.suggestionsPosition) {
-      console.log('updateSuggestionsPosition')
       this.updateSuggestionsPosition()
     }
 
     // maintain selection in case a mention is added/removed causing
     // the cursor to jump to the end
     if (this.state.setSelectionAfterMentionChange) {
-      console.log('setSelectionAfterMentionChange')
       this.setState({ setSelectionAfterMentionChange: false })
       this.setSelection(this.state.selectionStart, this.state.selectionEnd)
     }
     if (this.state.setSelectionAfterHandlePaste) {
-        console.log('setSelectionAfterHandlePaste')
       this.setState({ setSelectionAfterHandlePaste: false })
       this.setSelection(this.state.selectionStart, this.state.selectionEnd)
     }
@@ -170,7 +165,6 @@ class MentionsInput extends React.Component {
   }
 
   render() {
-    console.log('render', this.containerElement)
     return (
       <div ref={this.setContainerElement} {...this.props.style}>
         {this.renderControl()}
@@ -262,7 +256,6 @@ class MentionsInput extends React.Component {
   }
 
   renderSuggestionsOverlay = () => {
-    console.log(1111, this.state.selectionStart)
     if (!isNumber(this.state.selectionStart)) {
       // do not show suggestions when the input does not have the focus
       return null
@@ -294,6 +287,8 @@ class MentionsInput extends React.Component {
         {this.props.children}
       </SuggestionsOverlay>
     )
+
+    console.log(121212, this.props.suggestionsPortalHost)
     if (this.props.suggestionsPortalHost) {
       return ReactDOM.createPortal(
         suggestionsNode,
@@ -340,20 +335,17 @@ class MentionsInput extends React.Component {
   }
 
   executeOnChange = (event, ...args) => {
-    console.log(1, 'ste')
     if (this.props.onChange) {
       return this.props.onChange(event, ...args)
     }
 
     if (this.props.valueLink) {
-      console.log(2, 'ste')
       return this.props.valueLink.requestChange(event.target.value, ...args)
     }
   }
 
   // Handle input element's change event
   handleChange = (ev) => {
-    console.log('changing')
     isComposing = false
 
 
@@ -386,7 +378,6 @@ class MentionsInput extends React.Component {
 
     // In case a mention is deleted, also adjust the new plain text value
     newPlainTextValue = getPlainText(newValue, config)
-    console.log('ev.target.selectionStart', ev.target.selectionStart)
 
     // Save current selection after change to be able to restore caret position after rerendering
     let selectionStart = ev.target.selectionStart
@@ -406,13 +397,11 @@ class MentionsInput extends React.Component {
       this.state.selectionEnd > startOfMention
     ) {
       // only if a deletion has taken place
-      console.log("(ev.nativeEvent.data ? ev.nativeEvent.data.length : 0)", (ev.nativeEvent.data ? ev.nativeEvent.data.length : 0))
       selectionStart =
         startOfMention + (ev.nativeEvent.data ? ev.nativeEvent.data.length : 0)
       selectionEnd = selectionStart
       setSelectionAfterMentionChange = true
     }
-    console.log('selectionStart', selectionStart)
 
     this.setState({
       selectionStart,
@@ -423,7 +412,6 @@ class MentionsInput extends React.Component {
     let mentions = getMentions(newValue, config)
 
     if (ev.nativeEvent.isComposing && selectionStart === selectionEnd) {
-      console.log('updateMentionsQueries')
       this.updateMentionsQueries(this.inputElement.value, selectionStart)
     }
 
@@ -460,7 +448,6 @@ class MentionsInput extends React.Component {
   }
 
   handleKeyDown = (ev) => {
-    console.log('focus', ev, ev.target)
     // do not intercept key events if the suggestions overlay is not shown
     const suggestionsCount = countSuggestions(this.state.suggestions)
 
@@ -584,9 +571,7 @@ class MentionsInput extends React.Component {
       left: caretOffsetParentRect.left + caretPosition.left,
       top: caretOffsetParentRect.top + caretPosition.top + caretHeight,
     }
-    console.log(111)
     const shadowRoot = document.querySelector("arqa-ai-client")?.shadowRoot ?? document;
-    console.log(222, shadowRoot)
     const viewportHeight = Math.max(
         shadowRoot.documentElement.clientHeight,
       window.innerHeight || 0
