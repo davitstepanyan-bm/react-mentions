@@ -717,6 +717,7 @@ class MentionsInput extends React.Component {
       left: caretOffsetParentRect.left + caretPosition.left,
       top: caretOffsetParentRect.top + caretPosition.top + caretHeight,
     }
+    console.log(111)
     const shadowRoot = document.querySelector("test")?.shadowRoot ?? document
     const viewportHeight = Math.max(
         shadowRoot.documentElement.clientHeight,
