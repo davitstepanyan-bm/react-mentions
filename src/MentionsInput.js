@@ -142,9 +142,6 @@ class MentionsInput extends React.Component {
   }
 
   componentDidMount() {
-    document.addEventListener('copy', this.handleCopy)
-    document.addEventListener('cut', this.handleCut)
-    document.addEventListener('paste', this.handlePaste)
 
     this.updateSuggestionsPosition()
   }
@@ -169,9 +166,6 @@ class MentionsInput extends React.Component {
   }
 
   componentWillUnmount() {
-    document.removeEventListener('copy', this.handleCopy)
-    document.removeEventListener('cut', this.handleCut)
-    document.removeEventListener('paste', this.handlePaste)
   }
 
   render() {
@@ -501,16 +495,7 @@ class MentionsInput extends React.Component {
   // Handle input element's change event
   handleChange = (ev) => {
     isComposing = false
-    if (isIE()) {
-      // if we are inside iframe, we need to find activeElement within its contentDocument
-      const currentDocument =
-        (document.activeElement && document.activeElement.contentDocument) ||
-        document
-      if (currentDocument.activeElement !== ev.target) {
-        // fix an IE bug (blur from empty input element with placeholder attribute trigger "input" event)
-        return
-      }
-    }
+
 
     const value = this.props.value || ''
     const config = readConfigFromChildren(this.props.children)
@@ -732,8 +717,9 @@ class MentionsInput extends React.Component {
       left: caretOffsetParentRect.left + caretPosition.left,
       top: caretOffsetParentRect.top + caretPosition.top + caretHeight,
     }
+    const shadowRoot = document.querySelector("test")?.shadowRoot ?? document
     const viewportHeight = Math.max(
-      document.documentElement.clientHeight,
+        shadowRoot.documentElement.clientHeight,
       window.innerHeight || 0
     )
 
