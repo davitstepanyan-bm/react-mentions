@@ -814,7 +814,7 @@ var makeTriggerRegex = function(trigger) {
       });
     }), _defineProperty(_assertThisInitialized(_this), "renderControl", function() {
       var _this$props2 = _this.props, singleLine = _this$props2.singleLine, style = _this$props2.style, inputProps = _this.getInputProps();
-      return React__default.createElement("div", style("control"), _this.renderHighlighter(), singleLine ? _this.renderInput(inputProps) : _this.renderTextarea(inputProps));
+      return React__default.createElement("div", style("control"), singleLine ? _this.renderInput(inputProps) : _this.renderTextarea(inputProps));
     }), _defineProperty(_assertThisInitialized(_this), "renderInput", function(props) {
       return React__default.createElement("input", _extends({
         type: "text",

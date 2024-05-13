@@ -1241,7 +1241,7 @@ var MentionsInput = /*#__PURE__*/function (_React$Component) {
 
       var inputProps = _this.getInputProps();
 
-      return /*#__PURE__*/React.createElement("div", style('control'), _this.renderHighlighter(), singleLine ? _this.renderInput(inputProps) : _this.renderTextarea(inputProps));
+      return /*#__PURE__*/React.createElement("div", style('control'), singleLine ? _this.renderInput(inputProps) : _this.renderTextarea(inputProps));
     });
 
     _defineProperty(_assertThisInitialized(_this), "renderInput", function (props) {
