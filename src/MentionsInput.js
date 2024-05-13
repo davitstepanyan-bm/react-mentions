@@ -695,6 +695,7 @@ class MentionsInput extends React.Component {
   }
 
   updateMentionsQueries = (plainTextValue, caretPosition) => {
+    console.log('updateMentionsQueries')
     // Invalidate previous queries. Async results for previous queries will be neglected.
     this._queryId++
     this.suggestions = {}
@@ -735,8 +736,12 @@ class MentionsInput extends React.Component {
         return
       }
 
+
+      console.log('trigger')
+
       const regex = makeTriggerRegex(child.props.trigger, this.props)
-      const match = substring.match(regex)
+      const match = substring.match(regex);
+      console.log('match', match)
       if (match) {
         const querySequenceStart =
           substringStartIndex + substring.indexOf(match[1], match.index)

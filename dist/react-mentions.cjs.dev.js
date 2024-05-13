@@ -1710,7 +1710,8 @@ var MentionsInput = /*#__PURE__*/function (_React$Component) {
     });
 
     _defineProperty(_assertThisInitialized(_this), "updateMentionsQueries", function (plainTextValue, caretPosition) {
-      // Invalidate previous queries. Async results for previous queries will be neglected.
+      console.log('updateMentionsQueries'); // Invalidate previous queries. Async results for previous queries will be neglected.
+
       _this._queryId++;
       _this.suggestions = {};
 
@@ -1737,8 +1738,10 @@ var MentionsInput = /*#__PURE__*/function (_React$Component) {
           return;
         }
 
+        console.log('trigger');
         var regex = makeTriggerRegex(child.props.trigger, _this.props);
         var match = substring.match(regex);
+        console.log('match', match);
 
         if (match) {
           var querySequenceStart = substringStartIndex + substring.indexOf(match[1], match.index);

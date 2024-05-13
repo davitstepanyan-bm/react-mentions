@@ -1010,7 +1010,8 @@ var makeTriggerRegex = function(trigger) {
         }
       }
     }), _defineProperty(_assertThisInitialized(_this), "updateMentionsQueries", function(plainTextValue, caretPosition) {
-      _this._queryId++, _this.suggestions = {}, _this.setState({
+      console.log("updateMentionsQueries"), _this._queryId++, _this.suggestions = {}, 
+      _this.setState({
         suggestions: {}
       });
       var value = _this.props.value || "", children = _this.props.children, config = readConfigFromChildren(children), positionInValue = mapPlainTextIndex(value, config, caretPosition, "NULL");
@@ -1018,8 +1019,9 @@ var makeTriggerRegex = function(trigger) {
         var substringStartIndex = getEndOfLastMention(value.substring(0, positionInValue), config), substring = plainTextValue.substring(substringStartIndex, caretPosition);
         React__default.Children.forEach(children, function(child, childIndex) {
           if (child) {
+            console.log("trigger");
             var regex = makeTriggerRegex(child.props.trigger, _this.props), match = substring.match(regex);
-            if (match) {
+            if (console.log("match", match), match) {
               var querySequenceStart = substringStartIndex + substring.indexOf(match[1], match.index);
               _this.queryData(match[2], childIndex, querySequenceStart, querySequenceStart + match[1].length, plainTextValue);
             }
