@@ -122,10 +122,6 @@ class MentionsInput extends React.Component {
       .toString(16)
       .substring(2)
 
-    this.handleCopy = this.handleCopy.bind(this)
-    this.handleCut = this.handleCut.bind(this)
-    this.handlePaste = this.handlePaste.bind(this)
-
     this.state = {
       focusIndex: 0,
 
@@ -143,23 +139,28 @@ class MentionsInput extends React.Component {
 
   componentDidMount() {
 
+    console.log('mpount')
     this.updateSuggestionsPosition()
   }
 
   componentDidUpdate(prevProps, prevState) {
+    console.log('update')
     // Update position of suggestions unless this componentDidUpdate was
     // triggered by an update to suggestionsPosition.
     if (prevState.suggestionsPosition === this.state.suggestionsPosition) {
+      console.log('updateSuggestionsPosition')
       this.updateSuggestionsPosition()
     }
 
     // maintain selection in case a mention is added/removed causing
     // the cursor to jump to the end
     if (this.state.setSelectionAfterMentionChange) {
+      console.log('setSelectionAfterMentionChange')
       this.setState({ setSelectionAfterMentionChange: false })
       this.setSelection(this.state.selectionStart, this.state.selectionEnd)
     }
     if (this.state.setSelectionAfterHandlePaste) {
+        console.log('setSelectionAfterHandlePaste')
       this.setState({ setSelectionAfterHandlePaste: false })
       this.setSelection(this.state.selectionStart, this.state.selectionEnd)
     }
@@ -349,153 +350,6 @@ class MentionsInput extends React.Component {
     }
   }
 
-  handlePaste(event) {
-    if (event.target !== this.inputElement) {
-      return
-    }
-    if (!this.supportsClipboardActions(event)) {
-      return
-    }
-
-    event.preventDefault()
-
-    const { selectionStart, selectionEnd } = this.state
-    const { value, children } = this.props
-
-    const config = readConfigFromChildren(children)
-
-    const markupStartIndex = mapPlainTextIndex(
-      value,
-      config,
-      selectionStart,
-      'START'
-    )
-    const markupEndIndex = mapPlainTextIndex(value, config, selectionEnd, 'END')
-
-    const pastedMentions = event.clipboardData.getData('text/react-mentions')
-    const pastedData = event.clipboardData.getData('text/plain')
-
-    const newValue = spliceString(
-      value,
-      markupStartIndex,
-      markupEndIndex,
-      pastedMentions || pastedData
-    ).replace(/\r/g, '')
-
-    const newPlainTextValue = getPlainText(newValue, config)
-
-    const eventMock = { target: { ...event.target, value: newValue } }
-
-    this.executeOnChange(
-      eventMock,
-      newValue,
-      newPlainTextValue,
-      getMentions(newValue, config)
-    )
-
-    // Move the cursor position to the end of the pasted data
-    const startOfMention = findStartOfMentionInPlainText(
-      value,
-      config,
-      selectionStart
-    )
-    const nextPos =
-      (startOfMention || selectionStart) +
-      getPlainText(pastedMentions || pastedData, config).length
-    this.setState({
-      selectionStart: nextPos,
-      selectionEnd: nextPos,
-      setSelectionAfterHandlePaste: true,
-    })
-  }
-
-  saveSelectionToClipboard(event) {
-    // use the actual selectionStart & selectionEnd instead of the one stored
-    // in state to ensure copy & paste also works on disabled inputs & textareas
-    const selectionStart = this.inputElement.selectionStart
-    const selectionEnd = this.inputElement.selectionEnd
-    const { children, value } = this.props
-
-    const config = readConfigFromChildren(children)
-
-    const markupStartIndex = mapPlainTextIndex(
-      value,
-      config,
-      selectionStart,
-      'START'
-    )
-    const markupEndIndex = mapPlainTextIndex(value, config, selectionEnd, 'END')
-
-    event.clipboardData.setData(
-      'text/plain',
-      event.target.value.slice(selectionStart, selectionEnd)
-    )
-    event.clipboardData.setData(
-      'text/react-mentions',
-      value.slice(markupStartIndex, markupEndIndex)
-    )
-  }
-
-  supportsClipboardActions(event) {
-    return !!event.clipboardData
-  }
-
-  handleCopy(event) {
-    if (event.target !== this.inputElement) {
-      return
-    }
-    if (!this.supportsClipboardActions(event)) {
-      return
-    }
-
-    event.preventDefault()
-
-    this.saveSelectionToClipboard(event)
-  }
-
-  handleCut(event) {
-    if (event.target !== this.inputElement) {
-      return
-    }
-    if (!this.supportsClipboardActions(event)) {
-      return
-    }
-
-    event.preventDefault()
-
-    this.saveSelectionToClipboard(event)
-
-    const { selectionStart, selectionEnd } = this.state
-    const { children, value } = this.props
-
-    const config = readConfigFromChildren(children)
-
-    const markupStartIndex = mapPlainTextIndex(
-      value,
-      config,
-      selectionStart,
-      'START'
-    )
-    const markupEndIndex = mapPlainTextIndex(value, config, selectionEnd, 'END')
-
-    const newValue = [
-      value.slice(0, markupStartIndex),
-      value.slice(markupEndIndex),
-    ].join('')
-    const newPlainTextValue = getPlainText(newValue, config)
-
-    const eventMock = {
-      target: { ...event.target, value: newPlainTextValue },
-    }
-
-    this.executeOnChange(
-      eventMock,
-      newValue,
-      newPlainTextValue,
-      getMentions(value, config)
-    )
-  }
-
   // Handle input element's change event
   handleChange = (ev) => {
     console.log('changing')
@@ -568,6 +422,7 @@ class MentionsInput extends React.Component {
     let mentions = getMentions(newValue, config)
 
     if (ev.nativeEvent.isComposing && selectionStart === selectionEnd) {
+      console.log('updateMentionsQueries')
       this.updateMentionsQueries(this.inputElement.value, selectionStart)
     }
 

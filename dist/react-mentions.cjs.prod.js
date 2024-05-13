@@ -900,7 +900,8 @@ var makeTriggerRegex = function(trigger) {
         setSelectionAfterMentionChange: setSelectionAfterMentionChange
       });
       var mentions = getMentions(newValue, config);
-      ev.nativeEvent.isComposing && selectionStart === selectionEnd && _this.updateMentionsQueries(_this.inputElement.value, selectionStart);
+      ev.nativeEvent.isComposing && selectionStart === selectionEnd && (console.log("updateMentionsQueries"), 
+      _this.updateMentionsQueries(_this.inputElement.value, selectionStart));
       var eventMock = {
         target: {
           value: newValue
@@ -1088,9 +1089,7 @@ var makeTriggerRegex = function(trigger) {
     }), _defineProperty(_assertThisInitialized(_this), "isOpened", function() {
       return isNumber(_this.state.selectionStart) && (0 !== countSuggestions(_this.state.suggestions) || _this.isLoading());
     }), _defineProperty(_assertThisInitialized(_this), "_queryId", 0), _this.suggestions = {}, 
-    _this.uuidSuggestionsOverlay = Math.random().toString(16).substring(2), _this.handleCopy = _this.handleCopy.bind(_assertThisInitialized(_this)), 
-    _this.handleCut = _this.handleCut.bind(_assertThisInitialized(_this)), _this.handlePaste = _this.handlePaste.bind(_assertThisInitialized(_this)), 
-    _this.state = {
+    _this.uuidSuggestionsOverlay = Math.random().toString(16).substring(2), _this.state = {
       focusIndex: 0,
       selectionStart: null,
       selectionEnd: null,
@@ -1103,15 +1102,17 @@ var makeTriggerRegex = function(trigger) {
   return _createClass(MentionsInput, [ {
     key: "componentDidMount",
     value: function() {
-      this.updateSuggestionsPosition();
+      console.log("mpount"), this.updateSuggestionsPosition();
     }
   }, {
     key: "componentDidUpdate",
     value: function(prevProps, prevState) {
-      prevState.suggestionsPosition === this.state.suggestionsPosition && this.updateSuggestionsPosition(), 
-      this.state.setSelectionAfterMentionChange && (this.setState({
+      console.log("update"), prevState.suggestionsPosition === this.state.suggestionsPosition && (console.log("updateSuggestionsPosition"), 
+      this.updateSuggestionsPosition()), this.state.setSelectionAfterMentionChange && (console.log("setSelectionAfterMentionChange"), 
+      this.setState({
         setSelectionAfterMentionChange: !1
-      }), this.setSelection(this.state.selectionStart, this.state.selectionEnd)), this.state.setSelectionAfterHandlePaste && (this.setState({
+      }), this.setSelection(this.state.selectionStart, this.state.selectionEnd)), this.state.setSelectionAfterHandlePaste && (console.log("setSelectionAfterHandlePaste"), 
+      this.setState({
         setSelectionAfterHandlePaste: !1
       }), this.setSelection(this.state.selectionStart, this.state.selectionEnd));
     }
@@ -1124,56 +1125,6 @@ var makeTriggerRegex = function(trigger) {
       return React__default.createElement("div", _extends({
         ref: this.setContainerElement
       }, this.props.style), this.renderControl(), this.renderSuggestionsOverlay());
-    }
-  }, {
-    key: "handlePaste",
-    value: function(event) {
-      if (event.target === this.inputElement && this.supportsClipboardActions(event)) {
-        event.preventDefault();
-        var _this$state3 = this.state, selectionStart = _this$state3.selectionStart, selectionEnd = _this$state3.selectionEnd, _this$props7 = this.props, value = _this$props7.value, children = _this$props7.children, config = readConfigFromChildren(children), markupStartIndex = mapPlainTextIndex(value, config, selectionStart, "START"), markupEndIndex = mapPlainTextIndex(value, config, selectionEnd, "END"), pastedMentions = event.clipboardData.getData("text/react-mentions"), pastedData = event.clipboardData.getData("text/plain"), newValue = spliceString(value, markupStartIndex, markupEndIndex, pastedMentions || pastedData).replace(/\r/g, ""), newPlainTextValue = getPlainText(newValue, config), eventMock = {
-          target: _objectSpread$1(_objectSpread$1({}, event.target), {}, {
-            value: newValue
-          })
-        };
-        this.executeOnChange(eventMock, newValue, newPlainTextValue, getMentions(newValue, config));
-        var nextPos = (findStartOfMentionInPlainText(value, config, selectionStart) || selectionStart) + getPlainText(pastedMentions || pastedData, config).length;
-        this.setState({
-          selectionStart: nextPos,
-          selectionEnd: nextPos,
-          setSelectionAfterHandlePaste: !0
-        });
-      }
-    }
-  }, {
-    key: "saveSelectionToClipboard",
-    value: function(event) {
-      var selectionStart = this.inputElement.selectionStart, selectionEnd = this.inputElement.selectionEnd, _this$props8 = this.props, children = _this$props8.children, value = _this$props8.value, config = readConfigFromChildren(children), markupStartIndex = mapPlainTextIndex(value, config, selectionStart, "START"), markupEndIndex = mapPlainTextIndex(value, config, selectionEnd, "END");
-      event.clipboardData.setData("text/plain", event.target.value.slice(selectionStart, selectionEnd)), 
-      event.clipboardData.setData("text/react-mentions", value.slice(markupStartIndex, markupEndIndex));
-    }
-  }, {
-    key: "supportsClipboardActions",
-    value: function(event) {
-      return !!event.clipboardData;
-    }
-  }, {
-    key: "handleCopy",
-    value: function(event) {
-      event.target === this.inputElement && this.supportsClipboardActions(event) && (event.preventDefault(), 
-      this.saveSelectionToClipboard(event));
-    }
-  }, {
-    key: "handleCut",
-    value: function(event) {
-      if (event.target === this.inputElement && this.supportsClipboardActions(event)) {
-        event.preventDefault(), this.saveSelectionToClipboard(event);
-        var _this$state4 = this.state, selectionStart = _this$state4.selectionStart, selectionEnd = _this$state4.selectionEnd, _this$props9 = this.props, children = _this$props9.children, value = _this$props9.value, config = readConfigFromChildren(children), markupStartIndex = mapPlainTextIndex(value, config, selectionStart, "START"), markupEndIndex = mapPlainTextIndex(value, config, selectionEnd, "END"), newValue = [ value.slice(0, markupStartIndex), value.slice(markupEndIndex) ].join(""), newPlainTextValue = getPlainText(newValue, config), eventMock = {
-          target: _objectSpread$1(_objectSpread$1({}, event.target), {}, {
-            value: newPlainTextValue
-          })
-        };
-        this.executeOnChange(eventMock, newValue, newPlainTextValue, getMentions(value, config));
-      }
     }
   } ]), MentionsInput;
 }(React__default.Component);
