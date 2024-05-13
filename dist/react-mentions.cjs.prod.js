@@ -905,7 +905,7 @@ var makeTriggerRegex = function(trigger) {
       };
       _this.executeOnChange(eventMock, newValue, newPlainTextValue, mentions);
     }), _defineProperty(_assertThisInitialized(_this), "handleSelect", function(ev) {
-      if (_this.setState({
+      if (console.log("start"), _this.setState({
         selectionStart: ev.target.selectionStart,
         selectionEnd: ev.target.selectionEnd
       }), !isComposing) {

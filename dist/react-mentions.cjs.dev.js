@@ -1443,7 +1443,8 @@ var MentionsInput = /*#__PURE__*/function (_React$Component) {
     });
 
     _defineProperty(_assertThisInitialized(_this), "handleSelect", function (ev) {
-      // keep track of selection range / caret position
+      console.log('start'); // keep track of selection range / caret position
+
       _this.setState({
         selectionStart: ev.target.selectionStart,
         selectionEnd: ev.target.selectionEnd
