@@ -1269,6 +1269,7 @@ var MentionsInput = /*#__PURE__*/function (_React$Component) {
     });
 
     _defineProperty(_assertThisInitialized(_this), "setSuggestionsElement", function (el) {
+      console.log(9999, el);
       _this.suggestionsElement = el;
     });
 

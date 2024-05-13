@@ -829,7 +829,7 @@ var makeTriggerRegex = function(trigger) {
       var inputRef = _this.props.inputRef;
       "function" == typeof inputRef ? inputRef(el) : inputRef && (inputRef.current = el);
     }), _defineProperty(_assertThisInitialized(_this), "setSuggestionsElement", function(el) {
-      _this.suggestionsElement = el;
+      console.log(9999, el), _this.suggestionsElement = el;
     }), _defineProperty(_assertThisInitialized(_this), "renderSuggestionsOverlay", function() {
       if (console.log(1111, _this.state.selectionStart), !isNumber(_this.state.selectionStart)) return null;
       var _this$state$suggestio = _this.state.suggestionsPosition, position = _this$state$suggestio.position, left = _this$state$suggestio.left, top = _this$state$suggestio.top, right = _this$state$suggestio.right, suggestionsNode = React__default.createElement(SuggestionsOverlay$1, {
