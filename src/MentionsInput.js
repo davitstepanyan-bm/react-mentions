@@ -80,7 +80,7 @@ const propTypes = {
   value: PropTypes.string,
   onKeyDown: PropTypes.func,
   customSuggestionsContainer: PropTypes.func,
-  onSelect: PropTypes.func,
+  onFocus: PropTypes.func,
   onBlur: PropTypes.func,
   onChange: PropTypes.func,
   suggestionsPortalHost:
@@ -111,7 +111,7 @@ class MentionsInput extends React.Component {
     singleLine: false,
     allowSuggestionsAboveCursor: false,
     onKeyDown: () => null,
-    onSelect: () => null,
+    onFocus: () => null,
     onBlur: () => null,
   }
 
@@ -197,7 +197,7 @@ class MentionsInput extends React.Component {
       ...(!readOnly &&
         !disabled && {
           onChange: this.handleChange,
-          onSelect: this.handleSelect,
+          onFocus: this.handleSelect,
           onKeyDown: this.handleKeyDown,
           onBlur: this.handleBlur,
           onCompositionStart: this.handleCompositionStart,
@@ -276,7 +276,7 @@ class MentionsInput extends React.Component {
         containerRef={this.setSuggestionsElement}
         suggestions={this.state.suggestions}
         customSuggestionsContainer={this.props.customSuggestionsContainer}
-        onSelect={this.addMention}
+        onFocus={this.addMention}
         onMouseDown={this.handleSuggestionsMouseDown}
         onMouseEnter={this.handleSuggestionsMouseEnter}
         isLoading={this.isLoading()}
@@ -453,7 +453,7 @@ class MentionsInput extends React.Component {
     // sync highlighters scroll position
     this.updateHighlighterScroll()
 
-    this.props.onSelect(ev)
+    this.props.onFocus(ev)
   }
 
   handleKeyDown = (ev) => {

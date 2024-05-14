@@ -19,7 +19,7 @@ function SuggestionsOverlay({
   scrollFocusedIntoView,
   isLoading,
   isOpened,
-  onSelect = () => null,
+                              onFocus = () => null,
   ignoreAccents,
   containerRef,
   children,
@@ -115,7 +115,7 @@ function SuggestionsOverlay({
   }
 
   const select = (suggestion, queryInfo) => {
-    onSelect(suggestion, queryInfo)
+    onFocus(suggestion, queryInfo)
   }
 
   const getID = (suggestion) => {
@@ -153,7 +153,7 @@ SuggestionsOverlay.propTypes = {
   scrollFocusedIntoView: PropTypes.bool,
   isLoading: PropTypes.bool,
   isOpened: PropTypes.bool.isRequired,
-  onSelect: PropTypes.func,
+  onFocus: PropTypes.func,
   ignoreAccents: PropTypes.bool,
   customSuggestionsContainer: PropTypes.func,
   containerRef: PropTypes.oneOfType([

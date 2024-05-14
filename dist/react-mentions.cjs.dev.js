@@ -966,10 +966,10 @@ function SuggestionsOverlay(_ref) {
       scrollFocusedIntoView = _ref.scrollFocusedIntoView,
       isLoading = _ref.isLoading,
       isOpened = _ref.isOpened,
-      _ref$onSelect = _ref.onSelect,
-      onSelect = _ref$onSelect === void 0 ? function () {
+      _ref$onFocus = _ref.onFocus,
+      onFocus = _ref$onFocus === void 0 ? function () {
     return null;
-  } : _ref$onSelect,
+  } : _ref$onFocus,
       ignoreAccents = _ref.ignoreAccents,
       containerRef = _ref.containerRef,
       children = _ref.children,
@@ -1065,7 +1065,7 @@ function SuggestionsOverlay(_ref) {
   };
 
   var select = function select(suggestion, queryInfo) {
-    onSelect(suggestion, queryInfo);
+    onFocus(suggestion, queryInfo);
   };
 
   var getID = function getID(suggestion) {
@@ -1103,7 +1103,7 @@ SuggestionsOverlay.propTypes = {
   scrollFocusedIntoView: PropTypes.bool,
   isLoading: PropTypes.bool,
   isOpened: PropTypes.bool.isRequired,
-  onSelect: PropTypes.func,
+  onFocus: PropTypes.func,
   ignoreAccents: PropTypes.bool,
   customSuggestionsContainer: PropTypes.func,
   containerRef: PropTypes.oneOfType([PropTypes.func, PropTypes.shape({
@@ -1188,7 +1188,7 @@ var propTypes = {
   value: PropTypes.string,
   onKeyDown: PropTypes.func,
   customSuggestionsContainer: PropTypes.func,
-  onSelect: PropTypes.func,
+  onFocus: PropTypes.func,
   onBlur: PropTypes.func,
   onChange: PropTypes.func,
   suggestionsPortalHost: typeof Element === 'undefined' ? PropTypes.any : PropTypes.PropTypes.instanceOf(Element),
@@ -1227,7 +1227,7 @@ var MentionsInput = /*#__PURE__*/function (_React$Component) {
         onScroll: _this.updateHighlighterScroll
       }, !readOnly && !disabled && {
         onChange: _this.handleChange,
-        onSelect: _this.handleSelect,
+        onFocus: _this.handleSelect,
         onKeyDown: _this.handleKeyDown,
         onBlur: _this.handleBlur,
         onCompositionStart: _this.handleCompositionStart,
@@ -1304,7 +1304,7 @@ var MentionsInput = /*#__PURE__*/function (_React$Component) {
         containerRef: _this.setSuggestionsElement,
         suggestions: _this.state.suggestions,
         customSuggestionsContainer: _this.props.customSuggestionsContainer,
-        onSelect: _this.addMention,
+        onFocus: _this.addMention,
         onMouseDown: _this.handleSuggestionsMouseDown,
         onMouseEnter: _this.handleSuggestionsMouseEnter,
         isLoading: _this.isLoading(),
@@ -1464,7 +1464,7 @@ var MentionsInput = /*#__PURE__*/function (_React$Component) {
 
       _this.updateHighlighterScroll();
 
-      _this.props.onSelect(ev);
+      _this.props.onFocus(ev);
     });
 
     _defineProperty(_assertThisInitialized(_this), "handleKeyDown", function (ev) {
@@ -1956,7 +1956,7 @@ _defineProperty(MentionsInput, "defaultProps", {
   onKeyDown: function onKeyDown() {
     return null;
   },
-  onSelect: function onSelect() {
+  onFocus: function onFocus() {
     return null;
   },
   onBlur: function onBlur() {

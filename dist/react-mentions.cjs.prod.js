@@ -608,9 +608,9 @@ function LoadingIndicator(_ref) {
 var defaultstyle = {};
 
 function SuggestionsOverlay(_ref) {
-  var id = _ref.id, _ref$suggestions = _ref.suggestions, suggestions = void 0 === _ref$suggestions ? {} : _ref$suggestions, a11ySuggestionsListLabel = _ref.a11ySuggestionsListLabel, focusIndex = _ref.focusIndex, position = _ref.position, left = _ref.left, right = _ref.right, top = _ref.top, scrollFocusedIntoView = _ref.scrollFocusedIntoView, isLoading = _ref.isLoading, isOpened = _ref.isOpened, _ref$onSelect = _ref.onSelect, onSelect = void 0 === _ref$onSelect ? function() {
+  var id = _ref.id, _ref$suggestions = _ref.suggestions, suggestions = void 0 === _ref$suggestions ? {} : _ref$suggestions, a11ySuggestionsListLabel = _ref.a11ySuggestionsListLabel, focusIndex = _ref.focusIndex, position = _ref.position, left = _ref.left, right = _ref.right, top = _ref.top, scrollFocusedIntoView = _ref.scrollFocusedIntoView, isLoading = _ref.isLoading, isOpened = _ref.isOpened, _ref$onFocus = _ref.onFocus, onFocus = void 0 === _ref$onFocus ? function() {
     return null;
-  } : _ref$onSelect, ignoreAccents = _ref.ignoreAccents, containerRef = _ref.containerRef, children = _ref.children, style = _ref.style, customSuggestionsContainer = _ref.customSuggestionsContainer, onMouseDown = _ref.onMouseDown, onMouseEnter = _ref.onMouseEnter, _useState = React.useState(void 0), _useState2 = _slicedToArray(_useState, 2), ulElement = _useState2[0], setUlElement = _useState2[1];
+  } : _ref$onFocus, ignoreAccents = _ref.ignoreAccents, containerRef = _ref.containerRef, children = _ref.children, style = _ref.style, customSuggestionsContainer = _ref.customSuggestionsContainer, onMouseDown = _ref.onMouseDown, onMouseEnter = _ref.onMouseEnter, _useState = React.useState(void 0), _useState2 = _slicedToArray(_useState, 2), ulElement = _useState2[0], setUlElement = _useState2[1];
   React.useEffect(function() {
     if (ulElement && !(ulElement.offsetHeight >= ulElement.scrollHeight) && scrollFocusedIntoView) {
       var scrollTop = ulElement.scrollTop, _ulElement$children$f = ulElement.children[focusIndex].getBoundingClientRect(), top = _ulElement$children$f.top, bottom = _ulElement$children$f.bottom, topContainer = ulElement.getBoundingClientRect().top;
@@ -639,7 +639,7 @@ function SuggestionsOverlay(_ref) {
   }, handleMouseEnter = function(index, ev) {
     onMouseEnter && onMouseEnter(index);
   }, select = function(suggestion, queryInfo) {
-    onSelect(suggestion, queryInfo);
+    onFocus(suggestion, queryInfo);
   }, getID = function(suggestion) {
     return "string" == typeof suggestion ? suggestion : suggestion.id;
   };
@@ -680,7 +680,7 @@ SuggestionsOverlay.propTypes = {
   scrollFocusedIntoView: PropTypes.bool,
   isLoading: PropTypes.bool,
   isOpened: PropTypes.bool.isRequired,
-  onSelect: PropTypes.func,
+  onFocus: PropTypes.func,
   ignoreAccents: PropTypes.bool,
   customSuggestionsContainer: PropTypes.func,
   containerRef: PropTypes.oneOfType([ PropTypes.func, PropTypes.shape({
@@ -776,7 +776,7 @@ var makeTriggerRegex = function(trigger) {
   value: PropTypes.string,
   onKeyDown: PropTypes.func,
   customSuggestionsContainer: PropTypes.func,
-  onSelect: PropTypes.func,
+  onFocus: PropTypes.func,
   onBlur: PropTypes.func,
   onChange: PropTypes.func,
   suggestionsPortalHost: "undefined" == typeof Element ? PropTypes.any : PropTypes.PropTypes.instanceOf(Element),
@@ -799,7 +799,7 @@ var makeTriggerRegex = function(trigger) {
         onScroll: _this.updateHighlighterScroll
       }, !readOnly && !disabled && {
         onChange: _this.handleChange,
-        onSelect: _this.handleSelect,
+        onFocus: _this.handleSelect,
         onKeyDown: _this.handleKeyDown,
         onBlur: _this.handleBlur,
         onCompositionStart: _this.handleCompositionStart,
@@ -844,7 +844,7 @@ var makeTriggerRegex = function(trigger) {
         containerRef: _this.setSuggestionsElement,
         suggestions: _this.state.suggestions,
         customSuggestionsContainer: _this.props.customSuggestionsContainer,
-        onSelect: _this.addMention,
+        onFocus: _this.addMention,
         onMouseDown: _this.handleSuggestionsMouseDown,
         onMouseEnter: _this.handleSuggestionsMouseEnter,
         isLoading: _this.isLoading(),
@@ -911,7 +911,7 @@ var makeTriggerRegex = function(trigger) {
       }), !isComposing) {
         var el = _this.inputElement;
         ev.target.selectionStart === ev.target.selectionEnd ? _this.updateMentionsQueries(el.value, ev.target.selectionStart) : _this.clearSuggestions(), 
-        _this.updateHighlighterScroll(), _this.props.onSelect(ev);
+        _this.updateHighlighterScroll(), _this.props.onFocus(ev);
       }
     }), _defineProperty(_assertThisInitialized(_this), "handleKeyDown", function(ev) {
       if (0 !== countSuggestions(_this.state.suggestions) && _this.suggestionsElement) switch (Object.values(KEY).indexOf(ev.keyCode) >= 0 && (ev.preventDefault(), 
@@ -1128,7 +1128,7 @@ _defineProperty(MentionsInput, "propTypes", propTypes), _defineProperty(Mentions
   onKeyDown: function() {
     return null;
   },
-  onSelect: function() {
+  onFocus: function() {
     return null;
   },
   onBlur: function() {
