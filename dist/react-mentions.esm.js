@@ -1220,7 +1220,6 @@ var MentionsInput = /*#__PURE__*/function (_React$Component) {
       }, !readOnly && !disabled && {
         onChange: _this.handleChange,
         onSelect: _this.handleSelect,
-        onFocus: _this.handleFocus,
         onKeyDown: _this.handleKeyDown,
         onBlur: _this.handleBlur,
         onCompositionStart: _this.handleCompositionStart,
@@ -1242,7 +1241,7 @@ var MentionsInput = /*#__PURE__*/function (_React$Component) {
 
       var inputProps = _this.getInputProps();
 
-      return /*#__PURE__*/React.createElement("div", style('control'), singleLine ? _this.renderInput(inputProps) : _this.renderTextarea(inputProps));
+      return /*#__PURE__*/React.createElement("div", style('control'), _this.renderHighlighter(), singleLine ? _this.renderInput(inputProps) : _this.renderTextarea(inputProps));
     });
 
     _defineProperty(_assertThisInitialized(_this), "renderInput", function (props) {
@@ -1433,10 +1432,6 @@ var MentionsInput = /*#__PURE__*/function (_React$Component) {
       }; // this.props.onChange.call(this, eventMock, newValue, newPlainTextValue, mentions);
 
       _this.executeOnChange(eventMock, newValue, newPlainTextValue, mentions);
-    });
-
-    _defineProperty(_assertThisInitialized(_this), "handleFocus", function (ev) {
-      _this.handleSelect(ev);
     });
 
     _defineProperty(_assertThisInitialized(_this), "handleSelect", function (ev) {

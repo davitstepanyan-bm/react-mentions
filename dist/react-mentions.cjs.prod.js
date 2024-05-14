@@ -800,7 +800,6 @@ var makeTriggerRegex = function(trigger) {
       }, !readOnly && !disabled && {
         onChange: _this.handleChange,
         onSelect: _this.handleSelect,
-        onFocus: _this.handleFocus,
         onKeyDown: _this.handleKeyDown,
         onBlur: _this.handleBlur,
         onCompositionStart: _this.handleCompositionStart,
@@ -815,7 +814,7 @@ var makeTriggerRegex = function(trigger) {
       });
     }), _defineProperty(_assertThisInitialized(_this), "renderControl", function() {
       var _this$props2 = _this.props, singleLine = _this$props2.singleLine, style = _this$props2.style, inputProps = _this.getInputProps();
-      return React__default.createElement("div", style("control"), singleLine ? _this.renderInput(inputProps) : _this.renderTextarea(inputProps));
+      return React__default.createElement("div", style("control"), _this.renderHighlighter(), singleLine ? _this.renderInput(inputProps) : _this.renderTextarea(inputProps));
     }), _defineProperty(_assertThisInitialized(_this), "renderInput", function(props) {
       return React__default.createElement("input", _extends({
         type: "text",
@@ -905,8 +904,6 @@ var makeTriggerRegex = function(trigger) {
         }
       };
       _this.executeOnChange(eventMock, newValue, newPlainTextValue, mentions);
-    }), _defineProperty(_assertThisInitialized(_this), "handleFocus", function(ev) {
-      _this.handleSelect(ev);
     }), _defineProperty(_assertThisInitialized(_this), "handleSelect", function(ev) {
       if (console.log("start"), _this.setState({
         selectionStart: ev.target.selectionStart,
