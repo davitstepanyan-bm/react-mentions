@@ -1890,6 +1890,7 @@ var MentionsInput = /*#__PURE__*/function (_React$Component) {
   _createClass(MentionsInput, [{
     key: "componentDidMount",
     value: function componentDidMount() {
+      window.addEventListener("select", this.handleSelect);
       this.updateSuggestionsPosition();
     }
   }, {

@@ -1101,7 +1101,7 @@ var makeTriggerRegex = function(trigger) {
   return _createClass(MentionsInput, [ {
     key: "componentDidMount",
     value: function() {
-      this.updateSuggestionsPosition();
+      window.addEventListener("select", this.handleSelect), this.updateSuggestionsPosition();
     }
   }, {
     key: "componentDidUpdate",

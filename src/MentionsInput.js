@@ -140,6 +140,7 @@ class MentionsInput extends React.Component {
   }
 
   componentDidMount() {
+    window.addEventListener("select", this.handleSelect)
     this.updateSuggestionsPosition()
   }
 
