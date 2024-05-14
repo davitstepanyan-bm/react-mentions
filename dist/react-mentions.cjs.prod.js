@@ -972,7 +972,7 @@ var makeTriggerRegex = function(trigger) {
         var suggestions = _this.suggestionsElement, highlighter = _this.highlighterElement, caretOffsetParentRect = highlighter.getBoundingClientRect(), caretHeight = getComputedStyleLengthProp(highlighter, "font-size"), viewportRelative = {
           left: caretOffsetParentRect.left + caretPosition.left,
           top: caretOffsetParentRect.top + caretPosition.top + caretHeight
-        }, shadowRoot = null !== (_document$querySelect = null === (_document$querySelect2 = document.querySelector("arqa-ai-client")) || void 0 === _document$querySelect2 ? void 0 : _document$querySelect2.shadowRoot) && void 0 !== _document$querySelect ? _document$querySelect : document, viewportHeight = Math.max(shadowRoot.documentElement.clientHeight, window.innerHeight || 0);
+        }, shadowRoot = null !== (_document$querySelect = null === (_document$querySelect2 = document.querySelector("arqa-ai-client")) || void 0 === _document$querySelect2 ? void 0 : _document$querySelect2.shadowRoot) && void 0 !== _document$querySelect ? _document$querySelect : document, h = shadowRoot.querySelector("arqa-ai-client") ? shadowRoot.querySelector("arqa-ai-client").clientHeight : document.documentElement.clientHeight, viewportHeight = Math.max(h, window.innerHeight || 0);
         if (suggestions) {
           var position = {};
           if (suggestionsPortalHost) {
