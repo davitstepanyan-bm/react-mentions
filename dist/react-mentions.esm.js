@@ -1717,7 +1717,9 @@ var MentionsInput = /*#__PURE__*/function (_React$Component) {
       var value = _this.props.value || '';
       var children = _this.props.children;
       var config = readConfigFromChildren(children);
-      var positionInValue = mapPlainTextIndex(value, config, caretPosition, 'NULL'); // If caret is inside of mention, do not query
+      console.log(value, children, config);
+      var positionInValue = mapPlainTextIndex(value, config, caretPosition, 'NULL');
+      console.log('positionInValue', positionInValue); // If caret is inside of mention, do not query
 
       if (positionInValue === null) {
         return;
@@ -1735,6 +1737,7 @@ var MentionsInput = /*#__PURE__*/function (_React$Component) {
 
         var regex = makeTriggerRegex(child.props.trigger, _this.props);
         var match = substring.match(regex);
+        console.log('match', match);
 
         if (match) {
           var querySequenceStart = substringStartIndex + substring.indexOf(match[1], match.index);

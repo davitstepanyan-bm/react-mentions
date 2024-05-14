@@ -711,12 +711,16 @@ class MentionsInput extends React.Component {
     const { children } = this.props
     const config = readConfigFromChildren(children)
 
+    console.log(value, children, config)
+
     const positionInValue = mapPlainTextIndex(
       value,
       config,
       caretPosition,
       'NULL'
     )
+
+    console.log('positionInValue', positionInValue)
 
     // If caret is inside of mention, do not query
     if (positionInValue === null) {
@@ -744,6 +748,7 @@ class MentionsInput extends React.Component {
 
       const regex = makeTriggerRegex(child.props.trigger, this.props)
       const match = substring.match(regex);
+      console.log('match', match)
       if (match) {
         const querySequenceStart =
           substringStartIndex + substring.indexOf(match[1], match.index)
