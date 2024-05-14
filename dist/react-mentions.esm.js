@@ -958,10 +958,10 @@ function SuggestionsOverlay(_ref) {
       scrollFocusedIntoView = _ref.scrollFocusedIntoView,
       isLoading = _ref.isLoading,
       isOpened = _ref.isOpened,
-      _ref$onFocus = _ref.onFocus,
-      onFocus = _ref$onFocus === void 0 ? function () {
+      _ref$onSelect = _ref.onSelect,
+      onSelect = _ref$onSelect === void 0 ? function () {
     return null;
-  } : _ref$onFocus,
+  } : _ref$onSelect,
       ignoreAccents = _ref.ignoreAccents,
       containerRef = _ref.containerRef,
       children = _ref.children,
@@ -1057,7 +1057,7 @@ function SuggestionsOverlay(_ref) {
   };
 
   var select = function select(suggestion, queryInfo) {
-    onFocus(suggestion, queryInfo);
+    onSelect(suggestion, queryInfo);
   };
 
   var getID = function getID(suggestion) {
@@ -1180,7 +1180,7 @@ var propTypes = {
   value: PropTypes.string,
   onKeyDown: PropTypes.func,
   customSuggestionsContainer: PropTypes.func,
-  onFocus: PropTypes.func,
+  onSelect: PropTypes.func,
   onBlur: PropTypes.func,
   onChange: PropTypes.func,
   suggestionsPortalHost: typeof Element === 'undefined' ? PropTypes.any : PropTypes.PropTypes.instanceOf(Element),
@@ -1296,7 +1296,7 @@ var MentionsInput = /*#__PURE__*/function (_React$Component) {
         containerRef: _this.setSuggestionsElement,
         suggestions: _this.state.suggestions,
         customSuggestionsContainer: _this.props.customSuggestionsContainer,
-        onFocus: _this.addMention,
+        onSelect: _this.addMention,
         onMouseDown: _this.handleSuggestionsMouseDown,
         onMouseEnter: _this.handleSuggestionsMouseEnter,
         isLoading: _this.isLoading(),
@@ -1456,7 +1456,7 @@ var MentionsInput = /*#__PURE__*/function (_React$Component) {
 
       _this.updateHighlighterScroll();
 
-      _this.props.onFocus(ev);
+      _this.props.onSelect(ev);
     });
 
     _defineProperty(_assertThisInitialized(_this), "handleKeyDown", function (ev) {
@@ -1948,7 +1948,7 @@ _defineProperty(MentionsInput, "defaultProps", {
   onKeyDown: function onKeyDown() {
     return null;
   },
-  onFocus: function onFocus() {
+  onSelect: function onSelect() {
     return null;
   },
   onBlur: function onBlur() {

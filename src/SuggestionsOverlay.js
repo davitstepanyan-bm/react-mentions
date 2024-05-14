@@ -19,7 +19,7 @@ function SuggestionsOverlay({
   scrollFocusedIntoView,
   isLoading,
   isOpened,
-                              onFocus = () => null,
+                              onSelect = () => null,
   ignoreAccents,
   containerRef,
   children,
@@ -115,7 +115,7 @@ function SuggestionsOverlay({
   }
 
   const select = (suggestion, queryInfo) => {
-    onFocus(suggestion, queryInfo)
+    onSelect(suggestion, queryInfo)
   }
 
   const getID = (suggestion) => {
