@@ -974,9 +974,7 @@ var makeTriggerRegex = function(trigger) {
         var suggestions = _this.suggestionsElement, highlighter = _this.highlighterElement, caretOffsetParentRect = highlighter.getBoundingClientRect(), caretHeight = getComputedStyleLengthProp(highlighter, "font-size"), viewportRelative = {
           left: caretOffsetParentRect.left + caretPosition.left,
           top: caretOffsetParentRect.top + caretPosition.top + caretHeight
-        };
-        console.log(123, document.documentElement.clientHeight);
-        var viewportHeight = Math.max(document.documentElement.clientHeight, window.innerHeight || 0);
+        }, viewportHeight = Math.max(document.documentElement.clientHeight, window.innerHeight || 0);
         if (suggestions) {
           var position = {};
           if (suggestionsPortalHost) {
@@ -1101,8 +1099,8 @@ var makeTriggerRegex = function(trigger) {
     key: "componentDidMount",
     value: function() {
       document.addEventListener("copy", this.handleCopy), document.addEventListener("cut", this.handleCut), 
-      document.addEventListener("paste", this.handlePaste), document.addEventListener("custom-select", this.handleSelect), 
-      window.addEventListener("custom-select", this.handleSelect), this.updateSuggestionsPosition();
+      document.addEventListener("paste", this.handlePaste), window.addEventListener("suggestion-input-select", this.handleSelect), 
+      this.updateSuggestionsPosition();
     }
   }, {
     key: "componentDidUpdate",
@@ -1118,7 +1116,7 @@ var makeTriggerRegex = function(trigger) {
     key: "componentWillUnmount",
     value: function() {
       document.removeEventListener("copy", this.handleCopy), document.removeEventListener("cut", this.handleCut), 
-      document.removeEventListener("paste", this.handlePaste), document.removeEventListener("custom-select", this.handleSelect);
+      document.removeEventListener("paste", this.handlePaste), document.removeEventListener("suggestion-input-select", this.handleSelect);
     }
   }, {
     key: "render",

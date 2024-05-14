@@ -145,8 +145,7 @@ class MentionsInput extends React.Component {
     document.addEventListener('copy', this.handleCopy)
     document.addEventListener('cut', this.handleCut)
     document.addEventListener('paste', this.handlePaste)
-    document.addEventListener('custom-select', this.handleSelect)
-    window.addEventListener('custom-select', this.handleSelect)
+    window.addEventListener('suggestion-input-select', this.handleSelect)
 
     this.updateSuggestionsPosition()
   }
@@ -174,7 +173,7 @@ class MentionsInput extends React.Component {
     document.removeEventListener('copy', this.handleCopy)
     document.removeEventListener('cut', this.handleCut)
     document.removeEventListener('paste', this.handlePaste)
-    document.removeEventListener('custom-select', this.handleSelect)
+    document.removeEventListener('suggestion-input-select', this.handleSelect)
   }
 
   render() {
@@ -736,7 +735,6 @@ class MentionsInput extends React.Component {
       left: caretOffsetParentRect.left + caretPosition.left,
       top: caretOffsetParentRect.top + caretPosition.top + caretHeight,
     }
-    console.log(123,  document.documentElement.clientHeight)
     const viewportHeight = Math.max(
         document.documentElement.clientHeight,
         window.innerHeight || 0

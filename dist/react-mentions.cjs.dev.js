@@ -1615,7 +1615,6 @@ var MentionsInput = /*#__PURE__*/function (_React$Component) {
         left: caretOffsetParentRect.left + caretPosition.left,
         top: caretOffsetParentRect.top + caretPosition.top + caretHeight
       };
-      console.log(123, document.documentElement.clientHeight);
       var viewportHeight = Math.max(document.documentElement.clientHeight, window.innerHeight || 0);
 
       if (!suggestions) {
@@ -1905,8 +1904,7 @@ var MentionsInput = /*#__PURE__*/function (_React$Component) {
       document.addEventListener('copy', this.handleCopy);
       document.addEventListener('cut', this.handleCut);
       document.addEventListener('paste', this.handlePaste);
-      document.addEventListener('custom-select', this.handleSelect);
-      window.addEventListener('custom-select', this.handleSelect);
+      window.addEventListener('suggestion-input-select', this.handleSelect);
       this.updateSuggestionsPosition();
     }
   }, {
@@ -1940,7 +1938,7 @@ var MentionsInput = /*#__PURE__*/function (_React$Component) {
       document.removeEventListener('copy', this.handleCopy);
       document.removeEventListener('cut', this.handleCut);
       document.removeEventListener('paste', this.handlePaste);
-      document.removeEventListener('custom-select', this.handleSelect);
+      document.removeEventListener('suggestion-input-select', this.handleSelect);
     }
   }, {
     key: "render",
