@@ -1897,7 +1897,8 @@ var MentionsInput = /*#__PURE__*/function (_React$Component) {
       document.addEventListener('copy', this.handleCopy);
       document.addEventListener('cut', this.handleCut);
       document.addEventListener('paste', this.handlePaste);
-      document.addEventListener('select', this.handleSelect);
+      document.addEventListener('custom-select', this.handleSelect);
+      window.addEventListener('custom-select', this.handleSelect);
       this.updateSuggestionsPosition();
     }
   }, {
@@ -1931,7 +1932,7 @@ var MentionsInput = /*#__PURE__*/function (_React$Component) {
       document.removeEventListener('copy', this.handleCopy);
       document.removeEventListener('cut', this.handleCut);
       document.removeEventListener('paste', this.handlePaste);
-      document.removeEventListener('select', this.handleSelect);
+      document.removeEventListener('custom-select', this.handleSelect);
     }
   }, {
     key: "render",

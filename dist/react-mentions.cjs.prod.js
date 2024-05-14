@@ -1101,8 +1101,8 @@ var makeTriggerRegex = function(trigger) {
     key: "componentDidMount",
     value: function() {
       document.addEventListener("copy", this.handleCopy), document.addEventListener("cut", this.handleCut), 
-      document.addEventListener("paste", this.handlePaste), document.addEventListener("select", this.handleSelect), 
-      this.updateSuggestionsPosition();
+      document.addEventListener("paste", this.handlePaste), document.addEventListener("custom-select", this.handleSelect), 
+      window.addEventListener("custom-select", this.handleSelect), this.updateSuggestionsPosition();
     }
   }, {
     key: "componentDidUpdate",
@@ -1118,7 +1118,7 @@ var makeTriggerRegex = function(trigger) {
     key: "componentWillUnmount",
     value: function() {
       document.removeEventListener("copy", this.handleCopy), document.removeEventListener("cut", this.handleCut), 
-      document.removeEventListener("paste", this.handlePaste), document.removeEventListener("select", this.handleSelect);
+      document.removeEventListener("paste", this.handlePaste), document.removeEventListener("custom-select", this.handleSelect);
     }
   }, {
     key: "render",
