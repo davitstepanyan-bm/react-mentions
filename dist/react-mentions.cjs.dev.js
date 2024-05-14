@@ -1450,7 +1450,8 @@ var MentionsInput = /*#__PURE__*/function (_React$Component) {
     });
 
     _defineProperty(_assertThisInitialized(_this), "handleSelect", function (ev) {
-      // keep track of selection range / caret position
+      console.log('handleSelect', ev, ev.target.selectionStart, ev.target.selectionEnd); // keep track of selection range / caret position
+
       _this.setState({
         selectionStart: ev.target.selectionStart,
         selectionEnd: ev.target.selectionEnd
@@ -1614,6 +1615,7 @@ var MentionsInput = /*#__PURE__*/function (_React$Component) {
         left: caretOffsetParentRect.left + caretPosition.left,
         top: caretOffsetParentRect.top + caretPosition.top + caretHeight
       };
+      console.log(123, document.documentElement.clientHeight);
       var viewportHeight = Math.max(document.documentElement.clientHeight, window.innerHeight || 0);
 
       if (!suggestions) {

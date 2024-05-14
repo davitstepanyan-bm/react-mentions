@@ -589,6 +589,7 @@ class MentionsInput extends React.Component {
 
   // Handle input element's select event
   handleSelect = (ev) => {
+    console.log('handleSelect', ev, ev.target.selectionStart, ev.target.selectionEnd)
     // keep track of selection range / caret position
     this.setState({
       selectionStart: ev.target.selectionStart,
@@ -734,6 +735,7 @@ class MentionsInput extends React.Component {
       left: caretOffsetParentRect.left + caretPosition.left,
       top: caretOffsetParentRect.top + caretPosition.top + caretHeight,
     }
+    console.log(123,  document.documentElement.clientHeight)
     const viewportHeight = Math.max(
         document.documentElement.clientHeight,
         window.innerHeight || 0

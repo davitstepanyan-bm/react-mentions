@@ -906,7 +906,8 @@ var makeTriggerRegex = function(trigger) {
       };
       _this.executeOnChange(eventMock, newValue, newPlainTextValue, mentions);
     }), _defineProperty(_assertThisInitialized(_this), "handleSelect", function(ev) {
-      if (_this.setState({
+      if (console.log("handleSelect", ev, ev.target.selectionStart, ev.target.selectionEnd), 
+      _this.setState({
         selectionStart: ev.target.selectionStart,
         selectionEnd: ev.target.selectionEnd
       }), !isComposing) {
@@ -973,7 +974,9 @@ var makeTriggerRegex = function(trigger) {
         var suggestions = _this.suggestionsElement, highlighter = _this.highlighterElement, caretOffsetParentRect = highlighter.getBoundingClientRect(), caretHeight = getComputedStyleLengthProp(highlighter, "font-size"), viewportRelative = {
           left: caretOffsetParentRect.left + caretPosition.left,
           top: caretOffsetParentRect.top + caretPosition.top + caretHeight
-        }, viewportHeight = Math.max(document.documentElement.clientHeight, window.innerHeight || 0);
+        };
+        console.log(123, document.documentElement.clientHeight);
+        var viewportHeight = Math.max(document.documentElement.clientHeight, window.innerHeight || 0);
         if (suggestions) {
           var position = {};
           if (suggestionsPortalHost) {
