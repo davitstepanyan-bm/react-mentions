@@ -144,7 +144,6 @@ class MentionsInput extends React.Component {
   }
 
   componentDidUpdate(prevProps, prevState) {
-    console.log('update')
     // Update position of suggestions unless this componentDidUpdate was
     // triggered by an update to suggestionsPosition.
     if (prevState.suggestionsPosition === this.state.suggestionsPosition) {
@@ -254,7 +253,6 @@ class MentionsInput extends React.Component {
   }
 
   setSuggestionsElement = (el) => {
-    console.log(9999, el)
     this.suggestionsElement = el
   }
 
@@ -291,7 +289,6 @@ class MentionsInput extends React.Component {
       </SuggestionsOverlay>
     )
 
-    console.log(121212, this.state.suggestionsPosition, suggestionsNode)
     if (this.props.suggestionsPortalHost) {
       return ReactDOM.createPortal(
         suggestionsNode,
@@ -349,7 +346,6 @@ class MentionsInput extends React.Component {
 
   // Handle input element's change event
   handleChange = (ev) => {
-    console.log('change')
     isComposing = false
 
 
@@ -380,7 +376,6 @@ class MentionsInput extends React.Component {
       config
     )
 
-    console.log('change', newValue, newPlainTextValue)
 
     // In case a mention is deleted, also adjust the new plain text value
     newPlainTextValue = getPlainText(newValue, config)
@@ -397,7 +392,6 @@ class MentionsInput extends React.Component {
       config,
       selectionStart
     )
-    console.log('change', startOfMention, selectionStart, selectionEnd)
 
     if (
       startOfMention !== undefined &&
@@ -410,7 +404,6 @@ class MentionsInput extends React.Component {
       setSelectionAfterMentionChange = true
     }
 
-    console.log('change', selectionStart, selectionEnd, setSelectionAfterMentionChange)
 
     this.setState({
       selectionStart,
@@ -420,7 +413,6 @@ class MentionsInput extends React.Component {
 
     let mentions = getMentions(newValue, config)
 
-    console.log('change', mentions)
 
     if (ev.nativeEvent.isComposing && selectionStart === selectionEnd) {
       this.updateMentionsQueries(this.inputElement.value, selectionStart)
@@ -435,11 +427,11 @@ class MentionsInput extends React.Component {
 
   // Handle input element's select event
   handleSelect = (ev) => {
-    console.log('start')
+    console.log('start', ev.target.selectionStart, 'end', ev.target.selectionEnd)
     // keep track of selection range / caret position
     this.setState({
-      selectionStart: ev.target.selectionStart,
-      selectionEnd: ev.target.selectionEnd,
+      selectionStart: ev.target.selectionStart ?? 0,
+      selectionEnd: ev.target.selectionEnd ?? 0,
     })
 
     // do nothing while a IME composition session is active
@@ -708,7 +700,6 @@ class MentionsInput extends React.Component {
   }
 
   updateMentionsQueries = (plainTextValue, caretPosition) => {
-    console.log('updateMentionsQueries')
     // Invalidate previous queries. Async results for previous queries will be neglected.
     this._queryId++
     this.suggestions = {}
@@ -750,11 +741,9 @@ class MentionsInput extends React.Component {
       }
 
 
-      console.log('trigger')
 
       const regex = makeTriggerRegex(child.props.trigger, this.props)
       const match = substring.match(regex);
-      console.log('match', match)
       if (match) {
         const querySequenceStart =
           substringStartIndex + substring.indexOf(match[1], match.index)

@@ -831,7 +831,7 @@ var makeTriggerRegex = function(trigger) {
       var inputRef = _this.props.inputRef;
       "function" == typeof inputRef ? inputRef(el) : inputRef && (inputRef.current = el);
     }), _defineProperty(_assertThisInitialized(_this), "setSuggestionsElement", function(el) {
-      console.log(9999, el), _this.suggestionsElement = el;
+      _this.suggestionsElement = el;
     }), _defineProperty(_assertThisInitialized(_this), "renderSuggestionsOverlay", function() {
       if (!isNumber(_this.state.selectionStart)) return null;
       var _this$state$suggestio = _this.state.suggestionsPosition, position = _this$state$suggestio.position, left = _this$state$suggestio.left, top = _this$state$suggestio.top, right = _this$state$suggestio.right, suggestionsNode = React__default.createElement(SuggestionsOverlay$1, {
@@ -854,7 +854,7 @@ var makeTriggerRegex = function(trigger) {
         ignoreAccents: _this.props.ignoreAccents,
         a11ySuggestionsListLabel: _this.props.a11ySuggestionsListLabel
       }, _this.props.children);
-      return console.log(121212, _this.state.suggestionsPosition, suggestionsNode), _this.props.suggestionsPortalHost ? ReactDOM.createPortal(suggestionsNode, _this.props.suggestionsPortalHost) : suggestionsNode;
+      return _this.props.suggestionsPortalHost ? ReactDOM.createPortal(suggestionsNode, _this.props.suggestionsPortalHost) : suggestionsNode;
     }), _defineProperty(_assertThisInitialized(_this), "renderHighlighter", function() {
       var _this$state = _this.state, selectionStart = _this$state.selectionStart, selectionEnd = _this$state.selectionEnd, _this$props3 = _this.props, singleLine = _this$props3.singleLine, children = _this$props3.children, value = _this$props3.value, style = _this$props3.style;
       return React__default.createElement(Highlighter$1, {
@@ -879,7 +879,7 @@ var makeTriggerRegex = function(trigger) {
       var _this$props4, _this$props$valueLink;
       return _this.props.onChange ? (_this$props4 = _this.props).onChange.apply(_this$props4, [ event ].concat(args)) : _this.props.valueLink ? (_this$props$valueLink = _this.props.valueLink).requestChange.apply(_this$props$valueLink, [ event.target.value ].concat(args)) : void 0;
     }), _defineProperty(_assertThisInitialized(_this), "handleChange", function(ev) {
-      console.log("change"), isComposing = !1;
+      isComposing = !1;
       var value = _this.props.value || "", config = readConfigFromChildren(_this.props.children), newPlainTextValue = ev.target.value, selectionStartBefore = _this.state.selectionStart;
       null == selectionStartBefore && (selectionStartBefore = ev.target.selectionStart);
       var selectionEndBefore = _this.state.selectionEnd;
@@ -889,17 +889,16 @@ var makeTriggerRegex = function(trigger) {
         selectionEndBefore: selectionEndBefore,
         selectionEndAfter: ev.target.selectionEnd
       }, config);
-      console.log("change", newValue, newPlainTextValue), newPlainTextValue = getPlainText(newValue, config);
+      newPlainTextValue = getPlainText(newValue, config);
       var selectionStart = ev.target.selectionStart, selectionEnd = ev.target.selectionEnd, setSelectionAfterMentionChange = !1, startOfMention = findStartOfMentionInPlainText(value, config, selectionStart);
-      console.log("change", startOfMention, selectionStart, selectionEnd), void 0 !== startOfMention && _this.state.selectionEnd > startOfMention && (selectionEnd = selectionStart = startOfMention + (ev.nativeEvent.data ? ev.nativeEvent.data.length : 0), 
-      setSelectionAfterMentionChange = !0), console.log("change", selectionStart, selectionEnd, setSelectionAfterMentionChange), 
-      _this.setState({
+      void 0 !== startOfMention && _this.state.selectionEnd > startOfMention && (selectionEnd = selectionStart = startOfMention + (ev.nativeEvent.data ? ev.nativeEvent.data.length : 0), 
+      setSelectionAfterMentionChange = !0), _this.setState({
         selectionStart: selectionStart,
         selectionEnd: selectionEnd,
         setSelectionAfterMentionChange: setSelectionAfterMentionChange
       });
       var mentions = getMentions(newValue, config);
-      console.log("change", mentions), ev.nativeEvent.isComposing && selectionStart === selectionEnd && _this.updateMentionsQueries(_this.inputElement.value, selectionStart);
+      ev.nativeEvent.isComposing && selectionStart === selectionEnd && _this.updateMentionsQueries(_this.inputElement.value, selectionStart);
       var eventMock = {
         target: {
           value: newValue
@@ -907,9 +906,11 @@ var makeTriggerRegex = function(trigger) {
       };
       _this.executeOnChange(eventMock, newValue, newPlainTextValue, mentions);
     }), _defineProperty(_assertThisInitialized(_this), "handleSelect", function(ev) {
-      if (console.log("start"), _this.setState({
-        selectionStart: ev.target.selectionStart,
-        selectionEnd: ev.target.selectionEnd
+      var _ev$target$selectionS, _ev$target$selectionE;
+      if (console.log("start", ev.target.selectionStart, "end", ev.target.selectionEnd), 
+      _this.setState({
+        selectionStart: null !== (_ev$target$selectionS = ev.target.selectionStart) && void 0 !== _ev$target$selectionS ? _ev$target$selectionS : 0,
+        selectionEnd: null !== (_ev$target$selectionE = ev.target.selectionEnd) && void 0 !== _ev$target$selectionE ? _ev$target$selectionE : 0
       }), !isComposing) {
         var el = _this.inputElement;
         ev.target.selectionStart === ev.target.selectionEnd ? _this.updateMentionsQueries(el.value, ev.target.selectionStart) : _this.clearSuggestions(), 
@@ -1013,8 +1014,7 @@ var makeTriggerRegex = function(trigger) {
         }
       }
     }), _defineProperty(_assertThisInitialized(_this), "updateMentionsQueries", function(plainTextValue, caretPosition) {
-      console.log("updateMentionsQueries"), _this._queryId++, _this.suggestions = {}, 
-      _this.setState({
+      _this._queryId++, _this.suggestions = {}, _this.setState({
         suggestions: {}
       });
       var value = _this.props.value || "", children = _this.props.children, config = readConfigFromChildren(children), positionInValue = mapPlainTextIndex(value, config, caretPosition, "NULL");
@@ -1022,9 +1022,8 @@ var makeTriggerRegex = function(trigger) {
         var substringStartIndex = getEndOfLastMention(value.substring(0, positionInValue), config), substring = plainTextValue.substring(substringStartIndex, caretPosition);
         React__default.Children.forEach(children, function(child, childIndex) {
           if (child) {
-            console.log("trigger");
             var regex = makeTriggerRegex(child.props.trigger, _this.props), match = substring.match(regex);
-            if (console.log("match", match), match) {
+            if (match) {
               var querySequenceStart = substringStartIndex + substring.indexOf(match[1], match.index);
               _this.queryData(match[2], childIndex, querySequenceStart, querySequenceStart + match[1].length, plainTextValue);
             }
@@ -1103,7 +1102,7 @@ var makeTriggerRegex = function(trigger) {
   }, {
     key: "componentDidUpdate",
     value: function(prevProps, prevState) {
-      console.log("update"), prevState.suggestionsPosition === this.state.suggestionsPosition && this.updateSuggestionsPosition(), 
+      prevState.suggestionsPosition === this.state.suggestionsPosition && this.updateSuggestionsPosition(), 
       this.state.setSelectionAfterMentionChange && (this.setState({
         setSelectionAfterMentionChange: !1
       }), this.setSelection(this.state.selectionStart, this.state.selectionEnd)), this.state.setSelectionAfterHandlePaste && (this.setState({

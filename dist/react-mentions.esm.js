@@ -1271,7 +1271,6 @@ var MentionsInput = /*#__PURE__*/function (_React$Component) {
     });
 
     _defineProperty(_assertThisInitialized(_this), "setSuggestionsElement", function (el) {
-      console.log(9999, el);
       _this.suggestionsElement = el;
     });
 
@@ -1306,7 +1305,6 @@ var MentionsInput = /*#__PURE__*/function (_React$Component) {
         ignoreAccents: _this.props.ignoreAccents,
         a11ySuggestionsListLabel: _this.props.a11ySuggestionsListLabel
       }, _this.props.children);
-      console.log(121212, _this.state.suggestionsPosition, suggestionsNode);
 
       if (_this.props.suggestionsPortalHost) {
         return /*#__PURE__*/ReactDOM.createPortal(suggestionsNode, _this.props.suggestionsPortalHost);
@@ -1368,7 +1366,6 @@ var MentionsInput = /*#__PURE__*/function (_React$Component) {
     });
 
     _defineProperty(_assertThisInitialized(_this), "handleChange", function (ev) {
-      console.log('change');
       isComposing = false;
       var value = _this.props.value || '';
       var config = readConfigFromChildren(_this.props.children);
@@ -1390,8 +1387,7 @@ var MentionsInput = /*#__PURE__*/function (_React$Component) {
         selectionStartBefore: selectionStartBefore,
         selectionEndBefore: selectionEndBefore,
         selectionEndAfter: ev.target.selectionEnd
-      }, config);
-      console.log('change', newValue, newPlainTextValue); // In case a mention is deleted, also adjust the new plain text value
+      }, config); // In case a mention is deleted, also adjust the new plain text value
 
       newPlainTextValue = getPlainText(newValue, config); // Save current selection after change to be able to restore caret position after rerendering
 
@@ -1401,7 +1397,6 @@ var MentionsInput = /*#__PURE__*/function (_React$Component) {
       // selection range that are automatically deleted
 
       var startOfMention = findStartOfMentionInPlainText(value, config, selectionStart);
-      console.log('change', startOfMention, selectionStart, selectionEnd);
 
       if (startOfMention !== undefined && _this.state.selectionEnd > startOfMention) {
         // only if a deletion has taken place
@@ -1410,8 +1405,6 @@ var MentionsInput = /*#__PURE__*/function (_React$Component) {
         setSelectionAfterMentionChange = true;
       }
 
-      console.log('change', selectionStart, selectionEnd, setSelectionAfterMentionChange);
-
       _this.setState({
         selectionStart: selectionStart,
         selectionEnd: selectionEnd,
@@ -1419,7 +1412,6 @@ var MentionsInput = /*#__PURE__*/function (_React$Component) {
       });
 
       var mentions = getMentions(newValue, config);
-      console.log('change', mentions);
 
       if (ev.nativeEvent.isComposing && selectionStart === selectionEnd) {
         _this.updateMentionsQueries(_this.inputElement.value, selectionStart);
@@ -1437,11 +1429,13 @@ var MentionsInput = /*#__PURE__*/function (_React$Component) {
     });
 
     _defineProperty(_assertThisInitialized(_this), "handleSelect", function (ev) {
-      console.log('start'); // keep track of selection range / caret position
+      var _ev$target$selectionS, _ev$target$selectionE;
+
+      console.log('start', ev.target.selectionStart, 'end', ev.target.selectionEnd); // keep track of selection range / caret position
 
       _this.setState({
-        selectionStart: ev.target.selectionStart,
-        selectionEnd: ev.target.selectionEnd
+        selectionStart: (_ev$target$selectionS = ev.target.selectionStart) !== null && _ev$target$selectionS !== void 0 ? _ev$target$selectionS : 0,
+        selectionEnd: (_ev$target$selectionE = ev.target.selectionEnd) !== null && _ev$target$selectionE !== void 0 ? _ev$target$selectionE : 0
       }); // do nothing while a IME composition session is active
 
 
@@ -1712,8 +1706,7 @@ var MentionsInput = /*#__PURE__*/function (_React$Component) {
     });
 
     _defineProperty(_assertThisInitialized(_this), "updateMentionsQueries", function (plainTextValue, caretPosition) {
-      console.log('updateMentionsQueries'); // Invalidate previous queries. Async results for previous queries will be neglected.
-
+      // Invalidate previous queries. Async results for previous queries will be neglected.
       _this._queryId++;
       _this.suggestions = {};
 
@@ -1740,10 +1733,8 @@ var MentionsInput = /*#__PURE__*/function (_React$Component) {
           return;
         }
 
-        console.log('trigger');
         var regex = makeTriggerRegex(child.props.trigger, _this.props);
         var match = substring.match(regex);
-        console.log('match', match);
 
         if (match) {
           var querySequenceStart = substringStartIndex + substring.indexOf(match[1], match.index);
@@ -1898,9 +1889,8 @@ var MentionsInput = /*#__PURE__*/function (_React$Component) {
   }, {
     key: "componentDidUpdate",
     value: function componentDidUpdate(prevProps, prevState) {
-      console.log('update'); // Update position of suggestions unless this componentDidUpdate was
+      // Update position of suggestions unless this componentDidUpdate was
       // triggered by an update to suggestionsPosition.
-
       if (prevState.suggestionsPosition === this.state.suggestionsPosition) {
         this.updateSuggestionsPosition();
       } // maintain selection in case a mention is added/removed causing
