@@ -1368,6 +1368,7 @@ var MentionsInput = /*#__PURE__*/function (_React$Component) {
     });
 
     _defineProperty(_assertThisInitialized(_this), "handleChange", function (ev) {
+      console.log('handleChange', ev, ev.target.value);
       isComposing = false;
 
       if (isIE()) {

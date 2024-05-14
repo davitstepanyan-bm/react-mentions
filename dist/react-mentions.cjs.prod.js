@@ -879,7 +879,7 @@ var makeTriggerRegex = function(trigger) {
       var _this$props4, _this$props$valueLink;
       return _this.props.onChange ? (_this$props4 = _this.props).onChange.apply(_this$props4, [ event ].concat(args)) : _this.props.valueLink ? (_this$props$valueLink = _this.props.valueLink).requestChange.apply(_this$props$valueLink, [ event.target.value ].concat(args)) : void 0;
     }), _defineProperty(_assertThisInitialized(_this), "handleChange", function(ev) {
-      if ((isComposing = !1, isIE()) && (document.activeElement && document.activeElement.contentDocument || document).activeElement !== ev.target) return;
+      if ((console.log("handleChange", ev, ev.target.value), isComposing = !1, isIE()) && (document.activeElement && document.activeElement.contentDocument || document).activeElement !== ev.target) return;
       var value = _this.props.value || "", config = readConfigFromChildren(_this.props.children), newPlainTextValue = ev.target.value, selectionStartBefore = _this.state.selectionStart;
       null == selectionStartBefore && (selectionStartBefore = ev.target.selectionStart);
       var selectionEndBefore = _this.state.selectionEnd;
