@@ -801,6 +801,7 @@ var makeTriggerRegex = function(trigger) {
       }, !readOnly && !disabled && {
         onChange: _this.handleChange,
         onFocus: _this.handleSelect,
+        onSelect: _this.handleSelect,
         onKeyDown: _this.handleKeyDown,
         onBlur: _this.handleBlur,
         onCompositionStart: _this.handleCompositionStart,
@@ -912,7 +913,7 @@ var makeTriggerRegex = function(trigger) {
       }), !isComposing) {
         var el = _this.inputElement;
         ev.target.selectionStart === ev.target.selectionEnd ? _this.updateMentionsQueries(el.value, ev.target.selectionStart) : _this.clearSuggestions(), 
-        _this.updateHighlighterScroll(), _this.props.onFocus(ev);
+        _this.updateHighlighterScroll(), _this.props.onSelect(ev);
       }
     }), _defineProperty(_assertThisInitialized(_this), "handleKeyDown", function(ev) {
       if (0 !== countSuggestions(_this.state.suggestions) && _this.suggestionsElement) switch (Object.values(KEY).indexOf(ev.keyCode) >= 0 && (ev.preventDefault(), 

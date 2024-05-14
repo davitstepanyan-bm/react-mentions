@@ -1229,6 +1229,7 @@ var MentionsInput = /*#__PURE__*/function (_React$Component) {
       }, !readOnly && !disabled && {
         onChange: _this.handleChange,
         onFocus: _this.handleSelect,
+        onSelect: _this.handleSelect,
         onKeyDown: _this.handleKeyDown,
         onBlur: _this.handleBlur,
         onCompositionStart: _this.handleCompositionStart,
@@ -1465,7 +1466,7 @@ var MentionsInput = /*#__PURE__*/function (_React$Component) {
 
       _this.updateHighlighterScroll();
 
-      _this.props.onFocus(ev);
+      _this.props.onSelect(ev);
     });
 
     _defineProperty(_assertThisInitialized(_this), "handleKeyDown", function (ev) {

@@ -200,6 +200,7 @@ class MentionsInput extends React.Component {
         !disabled && {
           onChange: this.handleChange,
           onFocus: this.handleSelect,
+          onSelect: this.handleSelect,
           onKeyDown: this.handleKeyDown,
           onBlur: this.handleBlur,
           onCompositionStart: this.handleCompositionStart,
@@ -455,7 +456,7 @@ class MentionsInput extends React.Component {
     // sync highlighters scroll position
     this.updateHighlighterScroll()
 
-    this.props.onFocus(ev)
+    this.props.onSelect(ev)
   }
 
   handleKeyDown = (ev) => {
