@@ -915,8 +915,11 @@ var makeTriggerRegex = function(trigger) {
         selectionStart: selectionStart,
         selectionEnd: selectionEnd
       }), !isComposing) {
-        var _ev$detail$value, el = _this.inputElement;
-        if (console.log("el", el, el.value, selectionStart, selectionEnd), selectionStart === selectionEnd) _this.updateMentionsQueries(null !== (_ev$detail$value = ev.detail.value) && void 0 !== _ev$detail$value ? _ev$detail$value : el.value, selectionStart); else _this.clearSuggestions();
+        var el = _this.inputElement;
+        if (console.log("el", el, el.value, selectionStart, selectionEnd), selectionStart === selectionEnd) {
+          var str = ev.detail ? ev.detail.value : el.value;
+          console.log("str", str), _this.updateMentionsQueries(str, selectionStart);
+        } else _this.clearSuggestions();
         _this.updateHighlighterScroll(), _this.props.onSelect(ev);
       }
     }), _defineProperty(_assertThisInitialized(_this), "handleKeyDown", function(ev) {

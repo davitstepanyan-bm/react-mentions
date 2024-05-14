@@ -1465,9 +1465,10 @@ var MentionsInput = /*#__PURE__*/function (_React$Component) {
       console.log('el', el, el.value, selectionStart, selectionEnd);
 
       if (selectionStart === selectionEnd) {
-        var _ev$detail$value;
+        var str = ev.detail ? ev.detail.value : el.value;
+        console.log('str', str);
 
-        _this.updateMentionsQueries((_ev$detail$value = ev.detail.value) !== null && _ev$detail$value !== void 0 ? _ev$detail$value : el.value, selectionStart);
+        _this.updateMentionsQueries(str, selectionStart);
       } else {
         _this.clearSuggestions();
       } // sync highlighters scroll position

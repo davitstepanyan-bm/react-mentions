@@ -605,7 +605,9 @@ class MentionsInput extends React.Component {
     const el = this.inputElement;
     console.log('el', el, el.value, selectionStart, selectionEnd)
     if (selectionStart === selectionEnd) {
-      this.updateMentionsQueries(ev.detail.value ?? el.value, selectionStart)
+      const str = ev.detail ? ev.detail.value : el.value;
+      console.log('str', str)
+      this.updateMentionsQueries(str, selectionStart)
     } else {
       this.clearSuggestions()
     }
