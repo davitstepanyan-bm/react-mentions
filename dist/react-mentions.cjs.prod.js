@@ -906,13 +906,15 @@ var makeTriggerRegex = function(trigger) {
       };
       _this.executeOnChange(eventMock, newValue, newPlainTextValue, mentions);
     }), _defineProperty(_assertThisInitialized(_this), "handleSelect", function(ev) {
-      if (console.log("handleSelect", ev, ev.target.selectionStart, ev.target.selectionEnd), 
-      _this.setState({
-        selectionStart: ev.target.selectionStart,
-        selectionEnd: ev.target.selectionEnd
+      var _ev$detail;
+      console.log("handleSelect", ev, ev.target.selectionStart, ev.target.selectionEnd);
+      var _ref = null !== (_ev$detail = ev.detail) && void 0 !== _ev$detail ? _ev$detail : ev.target, selectionStart = _ref.selectionStart, selectionEnd = _ref.selectionEnd;
+      if (_this.setState({
+        selectionStart: selectionStart,
+        selectionEnd: selectionEnd
       }), !isComposing) {
         var el = _this.inputElement;
-        ev.target.selectionStart === ev.target.selectionEnd ? _this.updateMentionsQueries(el.value, ev.target.selectionStart) : _this.clearSuggestions(), 
+        selectionStart === selectionEnd ? _this.updateMentionsQueries(el.value, selectionStart) : _this.clearSuggestions(), 
         _this.updateHighlighterScroll(), _this.props.onSelect(ev);
       }
     }), _defineProperty(_assertThisInitialized(_this), "handleKeyDown", function(ev) {
@@ -941,8 +943,8 @@ var makeTriggerRegex = function(trigger) {
         scrollFocusedIntoView: !0
       });
     }), _defineProperty(_assertThisInitialized(_this), "selectFocused", function() {
-      var _this$state2 = _this.state, suggestions = _this$state2.suggestions, focusIndex = _this$state2.focusIndex, _Object$values$reduce = Object.values(suggestions).reduce(function(acc, _ref) {
-        var results = _ref.results, queryInfo = _ref.queryInfo;
+      var _this$state2 = _this.state, suggestions = _this$state2.suggestions, focusIndex = _this$state2.focusIndex, _Object$values$reduce = Object.values(suggestions).reduce(function(acc, _ref2) {
+        var results = _ref2.results, queryInfo = _ref2.queryInfo;
         return [].concat(_toConsumableArray(acc), _toConsumableArray(results.map(function(result) {
           return {
             result: result,
@@ -1055,8 +1057,8 @@ var makeTriggerRegex = function(trigger) {
           focusIndex: focusIndex >= suggestionsCount ? Math.max(suggestionsCount - 1, 0) : focusIndex
         });
       }
-    }), _defineProperty(_assertThisInitialized(_this), "addMention", function(_ref2, _ref3) {
-      var id = _ref2.id, display = _ref2.display, childIndex = _ref3.childIndex, querySequenceStart = _ref3.querySequenceStart, querySequenceEnd = _ref3.querySequenceEnd, plainTextValue = _ref3.plainTextValue, value = _this.props.value || "", config = readConfigFromChildren(_this.props.children), _mentionsChild$props = React.Children.toArray(_this.props.children)[childIndex].props, markup = _mentionsChild$props.markup, displayTransform = _mentionsChild$props.displayTransform, appendSpaceOnAdd = _mentionsChild$props.appendSpaceOnAdd, onAdd = _mentionsChild$props.onAdd, start = mapPlainTextIndex(value, config, querySequenceStart, "START"), end = start + querySequenceEnd - querySequenceStart, insert = makeMentionsMarkup(markup, id, display);
+    }), _defineProperty(_assertThisInitialized(_this), "addMention", function(_ref3, _ref4) {
+      var id = _ref3.id, display = _ref3.display, childIndex = _ref4.childIndex, querySequenceStart = _ref4.querySequenceStart, querySequenceEnd = _ref4.querySequenceEnd, plainTextValue = _ref4.plainTextValue, value = _this.props.value || "", config = readConfigFromChildren(_this.props.children), _mentionsChild$props = React.Children.toArray(_this.props.children)[childIndex].props, markup = _mentionsChild$props.markup, displayTransform = _mentionsChild$props.displayTransform, appendSpaceOnAdd = _mentionsChild$props.appendSpaceOnAdd, onAdd = _mentionsChild$props.onAdd, start = mapPlainTextIndex(value, config, querySequenceStart, "START"), end = start + querySequenceEnd - querySequenceStart, insert = makeMentionsMarkup(markup, id, display);
       appendSpaceOnAdd && (insert += " ");
       var newValue = spliceString(value, start, end, insert);
       _this.inputElement.focus();
@@ -1223,8 +1225,8 @@ var getComputedStyleLengthProp = function(forElement, propertyName) {
       marginLeft: -3
     } : null)
   }
-}, function(_ref4) {
-  var singleLine = _ref4.singleLine;
+}, function(_ref5) {
+  var singleLine = _ref5.singleLine;
   return {
     "&singleLine": singleLine,
     "&multiLine": !singleLine
