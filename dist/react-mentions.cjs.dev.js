@@ -629,6 +629,10 @@ var getSubstringIndex = function getSubstringIndex(str, substr, ignoreAccents) {
   return normalizeString(str).indexOf(normalizeString(substr));
 };
 
+var isIE = function isIE() {
+  return !!document.documentMode;
+};
+
 var isNumber = function isNumber(val) {
   return typeof val === 'number';
 };
@@ -1189,7 +1193,6 @@ var propTypes = {
   onKeyDown: PropTypes.func,
   customSuggestionsContainer: PropTypes.func,
   onSelect: PropTypes.func,
-  onFocus: PropTypes.func,
   onBlur: PropTypes.func,
   onChange: PropTypes.func,
   suggestionsPortalHost: typeof Element === 'undefined' ? PropTypes.any : PropTypes.PropTypes.instanceOf(Element),
@@ -1228,7 +1231,6 @@ var MentionsInput = /*#__PURE__*/function (_React$Component) {
         onScroll: _this.updateHighlighterScroll
       }, !readOnly && !disabled && {
         onChange: _this.handleChange,
-        onFocus: _this.handleSelect,
         onSelect: _this.handleSelect,
         onKeyDown: _this.handleKeyDown,
         onBlur: _this.handleBlur,
@@ -1375,6 +1377,17 @@ var MentionsInput = /*#__PURE__*/function (_React$Component) {
 
     _defineProperty(_assertThisInitialized(_this), "handleChange", function (ev) {
       isComposing = false;
+
+      if (isIE()) {
+        // if we are inside iframe, we need to find activeElement within its contentDocument
+        var currentDocument = document.activeElement && document.activeElement.contentDocument || document;
+
+        if (currentDocument.activeElement !== ev.target) {
+          // fix an IE bug (blur from empty input element with placeholder attribute trigger "input" event)
+          return;
+        }
+      }
+
       var value = _this.props.value || '';
       var config = readConfigFromChildren(_this.props.children);
       var newPlainTextValue = ev.target.value;
@@ -1420,7 +1433,6 @@ var MentionsInput = /*#__PURE__*/function (_React$Component) {
       });
 
       var mentions = getMentions(newValue, config);
-      console.log('condition', ev.nativeEvent.isComposing && selectionStart === selectionEnd, 'start', selectionStart, 'end', selectionEnd, 'isComposing', ev.nativeEvent.isComposing);
 
       if (ev.nativeEvent.isComposing && selectionStart === selectionEnd) {
         _this.updateMentionsQueries(_this.inputElement.value, selectionStart);
@@ -1438,19 +1450,14 @@ var MentionsInput = /*#__PURE__*/function (_React$Component) {
     });
 
     _defineProperty(_assertThisInitialized(_this), "handleSelect", function (ev) {
-      var _ev$target$selectionS, _ev$target$selectionE, _this$inputElement, _this$inputElement$ta, _this$inputElement2, _this$inputElement2$t;
-
-      console.log('start', ev.target.selectionStart, 'end', ev.target.selectionEnd); // keep track of selection range / caret position
-
+      // keep track of selection range / caret position
       _this.setState({
-        selectionStart: (_ev$target$selectionS = ev.target.selectionStart) !== null && _ev$target$selectionS !== void 0 ? _ev$target$selectionS : 0,
-        selectionEnd: (_ev$target$selectionE = ev.target.selectionEnd) !== null && _ev$target$selectionE !== void 0 ? _ev$target$selectionE : 0
-      });
+        selectionStart: ev.target.selectionStart,
+        selectionEnd: ev.target.selectionEnd
+      }); // do nothing while a IME composition session is active
 
-      console.log('isComposing', isComposing); // do nothing while a IME composition session is active
 
-      if (isComposing) return;
-      console.log('el', _this.inputElement, (_this$inputElement = _this.inputElement) === null || _this$inputElement === void 0 ? void 0 : (_this$inputElement$ta = _this$inputElement.target) === null || _this$inputElement$ta === void 0 ? void 0 : _this$inputElement$ta.selectionEnd, 'end', (_this$inputElement2 = _this.inputElement) === null || _this$inputElement2 === void 0 ? void 0 : (_this$inputElement2$t = _this$inputElement2.target) === null || _this$inputElement2$t === void 0 ? void 0 : _this$inputElement2$t.selectionStart); // refresh suggestions queries
+      if (isComposing) return; // refresh suggestions queries
 
       var el = _this.inputElement;
 
@@ -1588,14 +1595,11 @@ var MentionsInput = /*#__PURE__*/function (_React$Component) {
     });
 
     _defineProperty(_assertThisInitialized(_this), "updateSuggestionsPosition", function () {
-      var _document$querySelect, _document$querySelect2;
-
       var caretPosition = _this.state.caretPosition;
       var _this$props5 = _this.props,
           suggestionsPortalHost = _this$props5.suggestionsPortalHost,
           allowSuggestionsAboveCursor = _this$props5.allowSuggestionsAboveCursor,
           forceSuggestionsAboveCursor = _this$props5.forceSuggestionsAboveCursor;
-      console.log(122121, caretPosition, _this.suggestionsElement);
 
       if (!caretPosition || !_this.suggestionsElement) {
         return;
@@ -1610,9 +1614,7 @@ var MentionsInput = /*#__PURE__*/function (_React$Component) {
         left: caretOffsetParentRect.left + caretPosition.left,
         top: caretOffsetParentRect.top + caretPosition.top + caretHeight
       };
-      var shadowRoot = (_document$querySelect = (_document$querySelect2 = document.querySelector("arqa-ai-client")) === null || _document$querySelect2 === void 0 ? void 0 : _document$querySelect2.shadowRoot) !== null && _document$querySelect !== void 0 ? _document$querySelect : document;
-      var h = shadowRoot.querySelector("arqa-ai-client") ? shadowRoot.querySelector("arqa-ai-client").clientHeight : document.documentElement.clientHeight;
-      var viewportHeight = Math.max(h, window.innerHeight || 0);
+      var viewportHeight = Math.max(document.documentElement.clientHeight, window.innerHeight || 0);
 
       if (!suggestions) {
         return;
@@ -1728,9 +1730,7 @@ var MentionsInput = /*#__PURE__*/function (_React$Component) {
       var value = _this.props.value || '';
       var children = _this.props.children;
       var config = readConfigFromChildren(children);
-      console.log(value, children, config);
-      var positionInValue = mapPlainTextIndex(value, config, caretPosition, 'NULL');
-      console.log('positionInValue', positionInValue); // If caret is inside of mention, do not query
+      var positionInValue = mapPlainTextIndex(value, config, caretPosition, 'NULL'); // If caret is inside of mention, do not query
 
       if (positionInValue === null) {
         return;
@@ -1748,7 +1748,6 @@ var MentionsInput = /*#__PURE__*/function (_React$Component) {
 
         var regex = makeTriggerRegex(child.props.trigger, _this.props);
         var match = substring.match(regex);
-        console.log('match', match);
 
         if (match) {
           var querySequenceStart = substringStartIndex + substring.indexOf(match[1], match.index);
@@ -1883,6 +1882,9 @@ var MentionsInput = /*#__PURE__*/function (_React$Component) {
 
     _this.suggestions = {};
     _this.uuidSuggestionsOverlay = Math.random().toString(16).substring(2);
+    _this.handleCopy = _this.handleCopy.bind(_assertThisInitialized(_this));
+    _this.handleCut = _this.handleCut.bind(_assertThisInitialized(_this));
+    _this.handlePaste = _this.handlePaste.bind(_assertThisInitialized(_this));
     _this.state = {
       focusIndex: 0,
       selectionStart: null,
@@ -1898,7 +1900,10 @@ var MentionsInput = /*#__PURE__*/function (_React$Component) {
   _createClass(MentionsInput, [{
     key: "componentDidMount",
     value: function componentDidMount() {
-      window.addEventListener("select", this.handleSelect);
+      document.addEventListener('copy', this.handleCopy);
+      document.addEventListener('cut', this.handleCut);
+      document.addEventListener('paste', this.handlePaste);
+      document.addEventListener('select', this.handleSelect);
       this.updateSuggestionsPosition();
     }
   }, {
@@ -1928,7 +1933,12 @@ var MentionsInput = /*#__PURE__*/function (_React$Component) {
     }
   }, {
     key: "componentWillUnmount",
-    value: function componentWillUnmount() {}
+    value: function componentWillUnmount() {
+      document.removeEventListener('copy', this.handleCopy);
+      document.removeEventListener('cut', this.handleCut);
+      document.removeEventListener('paste', this.handlePaste);
+      document.removeEventListener('select', this.handleSelect);
+    }
   }, {
     key: "render",
     value: function render() {
@@ -1936,6 +1946,113 @@ var MentionsInput = /*#__PURE__*/function (_React$Component) {
         ref: this.setContainerElement
       }, this.props.style), this.renderControl(), this.renderSuggestionsOverlay());
     }
+  }, {
+    key: "handlePaste",
+    value: function handlePaste(event) {
+      if (event.target !== this.inputElement) {
+        return;
+      }
+
+      if (!this.supportsClipboardActions(event)) {
+        return;
+      }
+
+      event.preventDefault();
+      var _this$state3 = this.state,
+          selectionStart = _this$state3.selectionStart,
+          selectionEnd = _this$state3.selectionEnd;
+      var _this$props7 = this.props,
+          value = _this$props7.value,
+          children = _this$props7.children;
+      var config = readConfigFromChildren(children);
+      var markupStartIndex = mapPlainTextIndex(value, config, selectionStart, 'START');
+      var markupEndIndex = mapPlainTextIndex(value, config, selectionEnd, 'END');
+      var pastedMentions = event.clipboardData.getData('text/react-mentions');
+      var pastedData = event.clipboardData.getData('text/plain');
+      var newValue = spliceString(value, markupStartIndex, markupEndIndex, pastedMentions || pastedData).replace(/\r/g, '');
+      var newPlainTextValue = getPlainText(newValue, config);
+      var eventMock = {
+        target: _objectSpread$1(_objectSpread$1({}, event.target), {}, {
+          value: newValue
+        })
+      };
+      this.executeOnChange(eventMock, newValue, newPlainTextValue, getMentions(newValue, config)); // Move the cursor position to the end of the pasted data
+
+      var startOfMention = findStartOfMentionInPlainText(value, config, selectionStart);
+      var nextPos = (startOfMention || selectionStart) + getPlainText(pastedMentions || pastedData, config).length;
+      this.setState({
+        selectionStart: nextPos,
+        selectionEnd: nextPos,
+        setSelectionAfterHandlePaste: true
+      });
+    }
+  }, {
+    key: "saveSelectionToClipboard",
+    value: function saveSelectionToClipboard(event) {
+      // use the actual selectionStart & selectionEnd instead of the one stored
+      // in state to ensure copy & paste also works on disabled inputs & textareas
+      var selectionStart = this.inputElement.selectionStart;
+      var selectionEnd = this.inputElement.selectionEnd;
+      var _this$props8 = this.props,
+          children = _this$props8.children,
+          value = _this$props8.value;
+      var config = readConfigFromChildren(children);
+      var markupStartIndex = mapPlainTextIndex(value, config, selectionStart, 'START');
+      var markupEndIndex = mapPlainTextIndex(value, config, selectionEnd, 'END');
+      event.clipboardData.setData('text/plain', event.target.value.slice(selectionStart, selectionEnd));
+      event.clipboardData.setData('text/react-mentions', value.slice(markupStartIndex, markupEndIndex));
+    }
+  }, {
+    key: "supportsClipboardActions",
+    value: function supportsClipboardActions(event) {
+      return !!event.clipboardData;
+    }
+  }, {
+    key: "handleCopy",
+    value: function handleCopy(event) {
+      if (event.target !== this.inputElement) {
+        return;
+      }
+
+      if (!this.supportsClipboardActions(event)) {
+        return;
+      }
+
+      event.preventDefault();
+      this.saveSelectionToClipboard(event);
+    }
+  }, {
+    key: "handleCut",
+    value: function handleCut(event) {
+      if (event.target !== this.inputElement) {
+        return;
+      }
+
+      if (!this.supportsClipboardActions(event)) {
+        return;
+      }
+
+      event.preventDefault();
+      this.saveSelectionToClipboard(event);
+      var _this$state4 = this.state,
+          selectionStart = _this$state4.selectionStart,
+          selectionEnd = _this$state4.selectionEnd;
+      var _this$props9 = this.props,
+          children = _this$props9.children,
+          value = _this$props9.value;
+      var config = readConfigFromChildren(children);
+      var markupStartIndex = mapPlainTextIndex(value, config, selectionStart, 'START');
+      var markupEndIndex = mapPlainTextIndex(value, config, selectionEnd, 'END');
+      var newValue = [value.slice(0, markupStartIndex), value.slice(markupEndIndex)].join('');
+      var newPlainTextValue = getPlainText(newValue, config);
+      var eventMock = {
+        target: _objectSpread$1(_objectSpread$1({}, event.target), {}, {
+          value: newPlainTextValue
+        })
+      };
+      this.executeOnChange(eventMock, newValue, newPlainTextValue, getMentions(value, config));
+    } // Handle input element's change event
+
   }]);
 
   return MentionsInput;
@@ -1956,9 +2073,6 @@ _defineProperty(MentionsInput, "defaultProps", {
     return null;
   },
   onSelect: function onSelect() {
-    return null;
-  },
-  onFocus: function onFocus() {
     return null;
   },
   onBlur: function onBlur() {
