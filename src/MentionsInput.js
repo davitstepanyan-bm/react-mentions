@@ -413,6 +413,8 @@ class MentionsInput extends React.Component {
 
     let mentions = getMentions(newValue, config)
 
+    console.log('condition', ev.nativeEvent.isComposing && selectionStart === selectionEnd, 'start', selectionStart, 'end', selectionEnd, 'isComposing', ev.nativeEvent.isComposing)
+
 
     if (ev.nativeEvent.isComposing && selectionStart === selectionEnd) {
       this.updateMentionsQueries(this.inputElement.value, selectionStart)

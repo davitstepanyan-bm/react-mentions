@@ -898,6 +898,7 @@ var makeTriggerRegex = function(trigger) {
         setSelectionAfterMentionChange: setSelectionAfterMentionChange
       });
       var mentions = getMentions(newValue, config);
+      console.log("condition", ev.nativeEvent.isComposing && selectionStart === selectionEnd, "start", selectionStart, "end", selectionEnd, "isComposing", ev.nativeEvent.isComposing), 
       ev.nativeEvent.isComposing && selectionStart === selectionEnd && _this.updateMentionsQueries(_this.inputElement.value, selectionStart);
       var eventMock = {
         target: {
