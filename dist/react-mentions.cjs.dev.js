@@ -1437,7 +1437,7 @@ var MentionsInput = /*#__PURE__*/function (_React$Component) {
     });
 
     _defineProperty(_assertThisInitialized(_this), "handleSelect", function (ev) {
-      var _ev$target$selectionS, _ev$target$selectionE;
+      var _ev$target$selectionS, _ev$target$selectionE, _this$inputElement, _this$inputElement$ta, _this$inputElement2, _this$inputElement2$t;
 
       console.log('start', ev.target.selectionStart, 'end', ev.target.selectionEnd); // keep track of selection range / caret position
 
@@ -1449,7 +1449,7 @@ var MentionsInput = /*#__PURE__*/function (_React$Component) {
       console.log('isComposing', isComposing); // do nothing while a IME composition session is active
 
       if (isComposing) return;
-      console.log('el', _this.inputElement.target.selectionEnd, 'end', _this.inputElement.target.selectionStart); // refresh suggestions queries
+      console.log('el', _this.inputElement, (_this$inputElement = _this.inputElement) === null || _this$inputElement === void 0 ? void 0 : (_this$inputElement$ta = _this$inputElement.target) === null || _this$inputElement$ta === void 0 ? void 0 : _this$inputElement$ta.selectionEnd, 'end', (_this$inputElement2 = _this.inputElement) === null || _this$inputElement2 === void 0 ? void 0 : (_this$inputElement2$t = _this$inputElement2.target) === null || _this$inputElement2$t === void 0 ? void 0 : _this$inputElement2$t.selectionStart); // refresh suggestions queries
 
       var el = _this.inputElement;
 

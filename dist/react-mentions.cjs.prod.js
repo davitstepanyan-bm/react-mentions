@@ -906,13 +906,13 @@ var makeTriggerRegex = function(trigger) {
       };
       _this.executeOnChange(eventMock, newValue, newPlainTextValue, mentions);
     }), _defineProperty(_assertThisInitialized(_this), "handleSelect", function(ev) {
-      var _ev$target$selectionS, _ev$target$selectionE;
+      var _ev$target$selectionS, _ev$target$selectionE, _this$inputElement, _this$inputElement$ta, _this$inputElement2, _this$inputElement2$t;
       if (console.log("start", ev.target.selectionStart, "end", ev.target.selectionEnd), 
       _this.setState({
         selectionStart: null !== (_ev$target$selectionS = ev.target.selectionStart) && void 0 !== _ev$target$selectionS ? _ev$target$selectionS : 0,
         selectionEnd: null !== (_ev$target$selectionE = ev.target.selectionEnd) && void 0 !== _ev$target$selectionE ? _ev$target$selectionE : 0
       }), console.log("isComposing", isComposing), !isComposing) {
-        console.log("el", _this.inputElement.target.selectionEnd, "end", _this.inputElement.target.selectionStart);
+        console.log("el", _this.inputElement, null === (_this$inputElement = _this.inputElement) || void 0 === _this$inputElement ? void 0 : null === (_this$inputElement$ta = _this$inputElement.target) || void 0 === _this$inputElement$ta ? void 0 : _this$inputElement$ta.selectionEnd, "end", null === (_this$inputElement2 = _this.inputElement) || void 0 === _this$inputElement2 ? void 0 : null === (_this$inputElement2$t = _this$inputElement2.target) || void 0 === _this$inputElement2$t ? void 0 : _this$inputElement2$t.selectionStart);
         var el = _this.inputElement;
         ev.target.selectionStart === ev.target.selectionEnd ? _this.updateMentionsQueries(el.value, ev.target.selectionStart) : _this.clearSuggestions(), 
         _this.updateHighlighterScroll(), _this.props.onSelect(ev);
