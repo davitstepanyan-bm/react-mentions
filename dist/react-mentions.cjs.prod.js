@@ -911,7 +911,8 @@ var makeTriggerRegex = function(trigger) {
       _this.setState({
         selectionStart: null !== (_ev$target$selectionS = ev.target.selectionStart) && void 0 !== _ev$target$selectionS ? _ev$target$selectionS : 0,
         selectionEnd: null !== (_ev$target$selectionE = ev.target.selectionEnd) && void 0 !== _ev$target$selectionE ? _ev$target$selectionE : 0
-      }), !isComposing) {
+      }), console.log("isComposing", isComposing), !isComposing) {
+        console.log("el", _this.inputElement.target.selectionEnd, "end", ev.target.selectionStart);
         var el = _this.inputElement;
         ev.target.selectionStart === ev.target.selectionEnd ? _this.updateMentionsQueries(el.value, ev.target.selectionStart) : _this.clearSuggestions(), 
         _this.updateHighlighterScroll(), _this.props.onSelect(ev);

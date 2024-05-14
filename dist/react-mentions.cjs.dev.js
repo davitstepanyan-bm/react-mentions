@@ -1444,10 +1444,12 @@ var MentionsInput = /*#__PURE__*/function (_React$Component) {
       _this.setState({
         selectionStart: (_ev$target$selectionS = ev.target.selectionStart) !== null && _ev$target$selectionS !== void 0 ? _ev$target$selectionS : 0,
         selectionEnd: (_ev$target$selectionE = ev.target.selectionEnd) !== null && _ev$target$selectionE !== void 0 ? _ev$target$selectionE : 0
-      }); // do nothing while a IME composition session is active
+      });
 
+      console.log('isComposing', isComposing); // do nothing while a IME composition session is active
 
-      if (isComposing) return; // refresh suggestions queries
+      if (isComposing) return;
+      console.log('el', _this.inputElement.target.selectionEnd, 'end', ev.target.selectionStart); // refresh suggestions queries
 
       var el = _this.inputElement;
 
