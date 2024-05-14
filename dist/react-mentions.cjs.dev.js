@@ -1451,11 +1451,12 @@ var MentionsInput = /*#__PURE__*/function (_React$Component) {
     });
 
     _defineProperty(_assertThisInitialized(_this), "handleSelect", function (ev) {
-      var _ev$detail;
-
       console.log('handleSelect', ev, ev.target.selectionStart, ev.target.selectionEnd);
 
-      var _ref = (_ev$detail = ev.detail) !== null && _ev$detail !== void 0 ? _ev$detail : ev.target,
+      var _ref = ev.detail ? {
+        selectionStart: ev.detail.value.length,
+        selectionEnd: ev.detail.value.length
+      } : ev.target,
           selectionStart = _ref.selectionStart,
           selectionEnd = _ref.selectionEnd; // keep track of selection range / caret position
 
@@ -1472,7 +1473,9 @@ var MentionsInput = /*#__PURE__*/function (_React$Component) {
       console.log('el', el, el.value, selectionStart, selectionEnd);
 
       if (selectionStart === selectionEnd) {
-        _this.updateMentionsQueries(el.value, selectionStart);
+        var _ev$detail$value;
+
+        _this.updateMentionsQueries((_ev$detail$value = ev.detail.value) !== null && _ev$detail$value !== void 0 ? _ev$detail$value : el.value, selectionStart);
       } else {
         _this.clearSuggestions();
       } // sync highlighters scroll position

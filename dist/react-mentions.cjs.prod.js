@@ -906,15 +906,17 @@ var makeTriggerRegex = function(trigger) {
       };
       _this.executeOnChange(eventMock, newValue, newPlainTextValue, mentions);
     }), _defineProperty(_assertThisInitialized(_this), "handleSelect", function(ev) {
-      var _ev$detail;
       console.log("handleSelect", ev, ev.target.selectionStart, ev.target.selectionEnd);
-      var _ref = null !== (_ev$detail = ev.detail) && void 0 !== _ev$detail ? _ev$detail : ev.target, selectionStart = _ref.selectionStart, selectionEnd = _ref.selectionEnd;
+      var _ref = ev.detail ? {
+        selectionStart: ev.detail.value.length,
+        selectionEnd: ev.detail.value.length
+      } : ev.target, selectionStart = _ref.selectionStart, selectionEnd = _ref.selectionEnd;
       if (_this.setState({
         selectionStart: selectionStart,
         selectionEnd: selectionEnd
       }), !isComposing) {
-        var el = _this.inputElement;
-        console.log("el", el, el.value, selectionStart, selectionEnd), selectionStart === selectionEnd ? _this.updateMentionsQueries(el.value, selectionStart) : _this.clearSuggestions(), 
+        var _ev$detail$value, el = _this.inputElement;
+        if (console.log("el", el, el.value, selectionStart, selectionEnd), selectionStart === selectionEnd) _this.updateMentionsQueries(null !== (_ev$detail$value = ev.detail.value) && void 0 !== _ev$detail$value ? _ev$detail$value : el.value, selectionStart); else _this.clearSuggestions();
         _this.updateHighlighterScroll(), _this.props.onSelect(ev);
       }
     }), _defineProperty(_assertThisInitialized(_this), "handleKeyDown", function(ev) {
