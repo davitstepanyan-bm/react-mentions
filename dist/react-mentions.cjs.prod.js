@@ -914,7 +914,7 @@ var makeTriggerRegex = function(trigger) {
         selectionEnd: selectionEnd
       }), !isComposing) {
         var el = _this.inputElement;
-        selectionStart === selectionEnd ? _this.updateMentionsQueries(el.value, selectionStart) : _this.clearSuggestions(), 
+        console.log("el", el, el.value, selectionStart, selectionEnd), selectionStart === selectionEnd ? _this.updateMentionsQueries(el.value, selectionStart) : _this.clearSuggestions(), 
         _this.updateHighlighterScroll(), _this.props.onSelect(ev);
       }
     }), _defineProperty(_assertThisInitialized(_this), "handleKeyDown", function(ev) {
@@ -1019,12 +1019,12 @@ var makeTriggerRegex = function(trigger) {
         suggestions: {}
       });
       var value = _this.props.value || "", children = _this.props.children, config = readConfigFromChildren(children), positionInValue = mapPlainTextIndex(value, config, caretPosition, "NULL");
-      if (null !== positionInValue) {
+      if (console.log("positionInValue", positionInValue), null !== positionInValue) {
         var substringStartIndex = getEndOfLastMention(value.substring(0, positionInValue), config), substring = plainTextValue.substring(substringStartIndex, caretPosition);
-        React__default.Children.forEach(children, function(child, childIndex) {
+        console.log("children", children), React__default.Children.forEach(children, function(child, childIndex) {
           if (child) {
             var regex = makeTriggerRegex(child.props.trigger, _this.props), match = substring.match(regex);
-            if (match) {
+            if (console.log("match", match), match) {
               var querySequenceStart = substringStartIndex + substring.indexOf(match[1], match.index);
               _this.queryData(match[2], childIndex, querySequenceStart, querySequenceStart + match[1].length, plainTextValue);
             }

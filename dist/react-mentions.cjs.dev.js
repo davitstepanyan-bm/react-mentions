@@ -1469,6 +1469,7 @@ var MentionsInput = /*#__PURE__*/function (_React$Component) {
       if (isComposing) return; // refresh suggestions queries
 
       var el = _this.inputElement;
+      console.log('el', el, el.value, selectionStart, selectionEnd);
 
       if (selectionStart === selectionEnd) {
         _this.updateMentionsQueries(el.value, selectionStart);
@@ -1739,7 +1740,8 @@ var MentionsInput = /*#__PURE__*/function (_React$Component) {
       var value = _this.props.value || '';
       var children = _this.props.children;
       var config = readConfigFromChildren(children);
-      var positionInValue = mapPlainTextIndex(value, config, caretPosition, 'NULL'); // If caret is inside of mention, do not query
+      var positionInValue = mapPlainTextIndex(value, config, caretPosition, 'NULL');
+      console.log('positionInValue', positionInValue); // If caret is inside of mention, do not query
 
       if (positionInValue === null) {
         return;
@@ -1747,7 +1749,8 @@ var MentionsInput = /*#__PURE__*/function (_React$Component) {
 
 
       var substringStartIndex = getEndOfLastMention(value.substring(0, positionInValue), config);
-      var substring = plainTextValue.substring(substringStartIndex, caretPosition); // Check if suggestions have to be shown:
+      var substring = plainTextValue.substring(substringStartIndex, caretPosition);
+      console.log('children', children); // Check if suggestions have to be shown:
       // Match the trigger patterns of all Mention children on the extracted substring
 
       React__default.Children.forEach(children, function (child, childIndex) {
@@ -1757,6 +1760,7 @@ var MentionsInput = /*#__PURE__*/function (_React$Component) {
 
         var regex = makeTriggerRegex(child.props.trigger, _this.props);
         var match = substring.match(regex);
+        console.log('match', match);
 
         if (match) {
           var querySequenceStart = substringStartIndex + substring.indexOf(match[1], match.index);

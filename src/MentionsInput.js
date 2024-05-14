@@ -602,7 +602,8 @@ class MentionsInput extends React.Component {
     if (isComposing) return
 
     // refresh suggestions queries
-    const el = this.inputElement
+    const el = this.inputElement;
+    console.log('el', el, el.value, selectionStart, selectionEnd)
     if (selectionStart === selectionEnd) {
       this.updateMentionsQueries(el.value, selectionStart)
     } else {
@@ -878,6 +879,8 @@ class MentionsInput extends React.Component {
         'NULL'
     )
 
+    console.log('positionInValue', positionInValue)
+
     // If caret is inside of mention, do not query
     if (positionInValue === null) {
       return
@@ -893,6 +896,8 @@ class MentionsInput extends React.Component {
         caretPosition
     )
 
+    console.log('children', children)
+
     // Check if suggestions have to be shown:
     // Match the trigger patterns of all Mention children on the extracted substring
     React.Children.forEach(children, (child, childIndex) => {
@@ -901,7 +906,8 @@ class MentionsInput extends React.Component {
       }
 
       const regex = makeTriggerRegex(child.props.trigger, this.props)
-      const match = substring.match(regex)
+      const match = substring.match(regex);
+      console.log('match', match)
       if (match) {
         const querySequenceStart =
             substringStartIndex + substring.indexOf(match[1], match.index)
