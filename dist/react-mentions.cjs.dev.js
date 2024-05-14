@@ -1189,6 +1189,7 @@ var propTypes = {
   onKeyDown: PropTypes.func,
   customSuggestionsContainer: PropTypes.func,
   onSelect: PropTypes.func,
+  onFocus: PropTypes.func,
   onBlur: PropTypes.func,
   onChange: PropTypes.func,
   suggestionsPortalHost: typeof Element === 'undefined' ? PropTypes.any : PropTypes.PropTypes.instanceOf(Element),
@@ -1464,7 +1465,7 @@ var MentionsInput = /*#__PURE__*/function (_React$Component) {
 
       _this.updateHighlighterScroll();
 
-      _this.props.onSelect(ev);
+      _this.props.onFocus(ev);
     });
 
     _defineProperty(_assertThisInitialized(_this), "handleKeyDown", function (ev) {
@@ -1957,6 +1958,9 @@ _defineProperty(MentionsInput, "defaultProps", {
     return null;
   },
   onSelect: function onSelect() {
+    return null;
+  },
+  onFocus: function onFocus() {
     return null;
   },
   onBlur: function onBlur() {

@@ -777,6 +777,7 @@ var makeTriggerRegex = function(trigger) {
   onKeyDown: PropTypes.func,
   customSuggestionsContainer: PropTypes.func,
   onSelect: PropTypes.func,
+  onFocus: PropTypes.func,
   onBlur: PropTypes.func,
   onChange: PropTypes.func,
   suggestionsPortalHost: "undefined" == typeof Element ? PropTypes.any : PropTypes.PropTypes.instanceOf(Element),
@@ -911,7 +912,7 @@ var makeTriggerRegex = function(trigger) {
       }), !isComposing) {
         var el = _this.inputElement;
         ev.target.selectionStart === ev.target.selectionEnd ? _this.updateMentionsQueries(el.value, ev.target.selectionStart) : _this.clearSuggestions(), 
-        _this.updateHighlighterScroll(), _this.props.onSelect(ev);
+        _this.updateHighlighterScroll(), _this.props.onFocus(ev);
       }
     }), _defineProperty(_assertThisInitialized(_this), "handleKeyDown", function(ev) {
       if (0 !== countSuggestions(_this.state.suggestions) && _this.suggestionsElement) switch (Object.values(KEY).indexOf(ev.keyCode) >= 0 && (ev.preventDefault(), 
@@ -1129,6 +1130,9 @@ _defineProperty(MentionsInput, "propTypes", propTypes), _defineProperty(Mentions
     return null;
   },
   onSelect: function() {
+    return null;
+  },
+  onFocus: function() {
     return null;
   },
   onBlur: function() {
