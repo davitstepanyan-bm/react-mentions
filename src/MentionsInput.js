@@ -434,8 +434,12 @@ class MentionsInput extends React.Component {
       selectionEnd: ev.target.selectionEnd ?? 0,
     })
 
+    console.log('isComposing', isComposing)
+
     // do nothing while a IME composition session is active
     if (isComposing) return
+
+    console.log('el', this.inputElement.target.selectionEnd, 'end', ev.target.selectionStart)
 
     // refresh suggestions queries
     const el = this.inputElement
