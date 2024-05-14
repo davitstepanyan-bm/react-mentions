@@ -198,6 +198,7 @@ class MentionsInput extends React.Component {
         !disabled && {
           onChange: this.handleChange,
           onSelect: this.handleSelect,
+          onFocus: this.handleFocus,
           onKeyDown: this.handleKeyDown,
           onBlur: this.handleBlur,
           onCompositionStart: this.handleCompositionStart,
@@ -428,6 +429,10 @@ class MentionsInput extends React.Component {
     let eventMock = { target: { value: newValue } }
     // this.props.onChange.call(this, eventMock, newValue, newPlainTextValue, mentions);
     this.executeOnChange(eventMock, newValue, newPlainTextValue, mentions)
+  }
+
+  handleFocus = (ev) => {
+    this.handleSelect(ev);
   }
 
   // Handle input element's select event

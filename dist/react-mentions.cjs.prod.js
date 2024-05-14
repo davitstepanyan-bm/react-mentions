@@ -800,6 +800,7 @@ var makeTriggerRegex = function(trigger) {
       }, !readOnly && !disabled && {
         onChange: _this.handleChange,
         onSelect: _this.handleSelect,
+        onFocus: _this.handleFocus,
         onKeyDown: _this.handleKeyDown,
         onBlur: _this.handleBlur,
         onCompositionStart: _this.handleCompositionStart,
@@ -904,6 +905,8 @@ var makeTriggerRegex = function(trigger) {
         }
       };
       _this.executeOnChange(eventMock, newValue, newPlainTextValue, mentions);
+    }), _defineProperty(_assertThisInitialized(_this), "handleFocus", function(ev) {
+      _this.handleSelect(ev);
     }), _defineProperty(_assertThisInitialized(_this), "handleSelect", function(ev) {
       if (console.log("start"), _this.setState({
         selectionStart: ev.target.selectionStart,
