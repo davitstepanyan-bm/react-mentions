@@ -588,8 +588,7 @@ class MentionsInput extends React.Component {
   }
 
   // Handle input element's select event
-  handleSelect = (ev1) => {
-    const ev = ev1?.detail?.event ?? ev1;
+  handleSelect = (ev) => {
     console.log('handleSelect', ev, ev.target.selectionStart, ev.target.selectionEnd)
     // keep track of selection range / caret position
     this.setState({
