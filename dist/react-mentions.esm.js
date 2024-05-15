@@ -1442,11 +1442,10 @@ var MentionsInput = /*#__PURE__*/function (_React$Component) {
       _this.executeOnChange(eventMock, newValue, newPlainTextValue, mentions);
     });
 
-    _defineProperty(_assertThisInitialized(_this), "handleSelect", function (event) {
+    _defineProperty(_assertThisInitialized(_this), "handleSelect", function (ev) {
       // console.log('handleSelect', ev, ev.target.selectionStart, ev.target.selectionEnd)
-      var ev = event.detail ? event.detail.event : event; // const { selectionStart, selectionEnd } = ev.detail ? { selectionStart: ev.detail.value.length, selectionEnd: ev.detail.value.length }  : ev.target;
+      // const { selectionStart, selectionEnd } = ev.detail ? { selectionStart: ev.detail.value.length, selectionEnd: ev.detail.value.length }  : ev.target;
       // keep track of selection range / caret position
-
       _this.setState({
         selectionStart: ev.target.selectionStart,
         selectionEnd: ev.target.selectionEnd
