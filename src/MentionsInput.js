@@ -591,23 +591,20 @@ class MentionsInput extends React.Component {
   // Handle input element's select event
   handleSelect = (ev) => {
     console.log('handleSelect', ev, ev.target.selectionStart, ev.target.selectionEnd)
-    const { selectionStart, selectionEnd } = ev.detail ? { selectionStart: ev.detail.value.length, selectionEnd: ev.detail.value.length }  : ev.target;
+    // const { selectionStart, selectionEnd } = ev.detail ? { selectionStart: ev.detail.value.length, selectionEnd: ev.detail.value.length }  : ev.target;
     // keep track of selection range / caret position
     this.setState({
-      selectionStart,
-      selectionEnd,
+      selectionStart: ev.target.selectionStart,
+      selectionEnd: ev.target.selectionEnd,
     })
 
     // do nothing while a IME composition session is active
     if (isComposing) return
 
     // refresh suggestions queries
-    const el = this.inputElement;
-    console.log('el', el, el.value, selectionStart, selectionEnd)
-    if (selectionStart === selectionEnd) {
-      const str = ev.detail ? ev.detail.value : el.value;
-      console.log('str', str)
-      this.updateMentionsQueries(str, selectionStart)
+    const el = this.inputElement
+    if (ev.target.selectionStart === ev.target.selectionEnd) {
+      this.updateMentionsQueries(el.value, ev.target.selectionStart)
     } else {
       this.clearSuggestions()
     }

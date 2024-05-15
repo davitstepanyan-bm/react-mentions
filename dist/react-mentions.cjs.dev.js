@@ -1451,32 +1451,21 @@ var MentionsInput = /*#__PURE__*/function (_React$Component) {
     });
 
     _defineProperty(_assertThisInitialized(_this), "handleSelect", function (ev) {
-      console.log('handleSelect', ev, ev.target.selectionStart, ev.target.selectionEnd);
-
-      var _ref = ev.detail ? {
-        selectionStart: ev.detail.value.length,
-        selectionEnd: ev.detail.value.length
-      } : ev.target,
-          selectionStart = _ref.selectionStart,
-          selectionEnd = _ref.selectionEnd; // keep track of selection range / caret position
-
+      console.log('handleSelect', ev, ev.target.selectionStart, ev.target.selectionEnd); // const { selectionStart, selectionEnd } = ev.detail ? { selectionStart: ev.detail.value.length, selectionEnd: ev.detail.value.length }  : ev.target;
+      // keep track of selection range / caret position
 
       _this.setState({
-        selectionStart: selectionStart,
-        selectionEnd: selectionEnd
+        selectionStart: ev.target.selectionStart,
+        selectionEnd: ev.target.selectionEnd
       }); // do nothing while a IME composition session is active
 
 
       if (isComposing) return; // refresh suggestions queries
 
       var el = _this.inputElement;
-      console.log('el', el, el.value, selectionStart, selectionEnd);
 
-      if (selectionStart === selectionEnd) {
-        var str = ev.detail ? ev.detail.value : el.value;
-        console.log('str', str);
-
-        _this.updateMentionsQueries(str, selectionStart);
+      if (ev.target.selectionStart === ev.target.selectionEnd) {
+        _this.updateMentionsQueries(el.value, ev.target.selectionStart);
       } else {
         _this.clearSuggestions();
       } // sync highlighters scroll position
@@ -1558,9 +1547,9 @@ var MentionsInput = /*#__PURE__*/function (_React$Component) {
       var _this$state2 = _this.state,
           suggestions = _this$state2.suggestions,
           focusIndex = _this$state2.focusIndex;
-      var _Object$values$reduce = Object.values(suggestions).reduce(function (acc, _ref2) {
-        var results = _ref2.results,
-            queryInfo = _ref2.queryInfo;
+      var _Object$values$reduce = Object.values(suggestions).reduce(function (acc, _ref) {
+        var results = _ref.results,
+            queryInfo = _ref.queryInfo;
         return [].concat(_toConsumableArray(acc), _toConsumableArray(results.map(function (result) {
           return {
             result: result,
@@ -1822,13 +1811,13 @@ var MentionsInput = /*#__PURE__*/function (_React$Component) {
       });
     });
 
-    _defineProperty(_assertThisInitialized(_this), "addMention", function (_ref3, _ref4) {
-      var id = _ref3.id,
-          display = _ref3.display;
-      var childIndex = _ref4.childIndex,
-          querySequenceStart = _ref4.querySequenceStart,
-          querySequenceEnd = _ref4.querySequenceEnd,
-          plainTextValue = _ref4.plainTextValue;
+    _defineProperty(_assertThisInitialized(_this), "addMention", function (_ref2, _ref3) {
+      var id = _ref2.id,
+          display = _ref2.display;
+      var childIndex = _ref3.childIndex,
+          querySequenceStart = _ref3.querySequenceStart,
+          querySequenceEnd = _ref3.querySequenceEnd,
+          plainTextValue = _ref3.plainTextValue;
       // Insert mention in the marked up value at the correct position
       var value = _this.props.value || '';
       var config = readConfigFromChildren(_this.props.children);
@@ -2130,8 +2119,8 @@ var styled$3 = createDefaultStyle({
       marginLeft: -3
     } : null)
   }
-}, function (_ref5) {
-  var singleLine = _ref5.singleLine;
+}, function (_ref4) {
+  var singleLine = _ref4.singleLine;
   return {
     '&singleLine': singleLine,
     '&multiLine': !singleLine
